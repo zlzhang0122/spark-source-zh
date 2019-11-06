@@ -5,7 +5,7 @@
 
 ![Spark架构图](../image/spark.png "Spark架构图")
 
-对于该图官网有几点说明：
+对于该图官网有几点说明：<br/>
 （1）不同的Spark应用程序对应着不同的Executor，这些Executor在整个应用程序执行期间都存在，并且可以以多线程的方式执行Task。(Hmmmm....回忆
 一下，Storm中也有Executor，但Storm中的Executor是一个单独的线程，默认里面有一个Task，如果设置多个，同一个Executor中的Task必须是同类型的，
 要么是Spout，要么是bolt，并且多个Task以串形方式执行。Flink中呢没有Executor，与之对应的个人觉得应该是Slot，Slot中以多线程的方式运行Task，
