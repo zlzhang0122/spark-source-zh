@@ -1,0 +1,5 @@
+### Spark任务提交
+
+不论是调用saveAsHadoopDataset方法还是调用其他的方法启动Spark任务，最终都会调用SparkContext中的runJob方法，该方法在RDD的所有分区上运行任务，
+并且以数据的方式返回结果，它是Spark里所有action的主入口。它内部是调用dagScheduler的runJob方法执行，runJob方法中通过submitJob方法进行任务的
+提交，并返回JobWaiter对象，该对象会等待job的执行完成，然后传递所有的结果到resultHandler方法进行后续的处理。
