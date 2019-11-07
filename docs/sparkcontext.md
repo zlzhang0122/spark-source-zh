@@ -31,3 +31,7 @@ Spark中有几个非常重要的成员：TaskScheduler、HeartbeatReceiver、DAG
 通过集群的配置来获取调度模式，目前支持两种调度模式：FIFO和公平调度，默认是FIFO调度模式。start()方法主要是backend的启动。对于非本地模式且设置了
 spark.speculation为true的情况，指定时间未返回的task会启动另外的task去执行。对于一般应用，这在可能减少任务的执行时间的同时，也造成了集群计算资源的
 浪费。因此对于时效性要求不高的离线应用来说，不推荐这样的设置。Standalone模式的SchedulerBackend是SparkDeploySchedulerBackend。
+
+资源调度SchedulerBackend类及相关子类如下图：
+
+![SchedulerBackend类图](../image/schedulerbackend.png "SchedulerBackend类图")
