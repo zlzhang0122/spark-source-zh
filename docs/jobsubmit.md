@@ -20,7 +20,13 @@ eventQueue是一个LinkedBlockingDeque可能会无限制的增长，因此子类
 DAGSchedulerEventProcessLoop就是EventLoop的子类，它对onReceive进行了实现，主要是在其中调用了doOnReceive方法，在doOnReceive方法的具体实现中，
 会根据事件类型调用对应的方法进行处理，此处是JobSubmitted类型事件，所以会调用dagScheduler的handlerJobSubmitted方法完成整个job的提交。
 
-在handlerJobSubmitted方法中首先会根据RDD创建finalStage，finalStage就是最后的那个stage，然后创建job，最后进行提交job。提交的job如果满足
+在handlerJobSubmitted方法中首先会根据RDD创建finalStage，finalStage就是最后的那个Stage。Stage又是什么呢？在 [Spark源码阅读2：创建SparkContext](../master/docs/sparkcontext.md)
+已经说过，Task是集群上运行的基本单位，一个Task会负责处理RDD的一个Partition。所以RDD的多个partition会分别由不同的Task去处理，虽然这些Task的
+处理逻辑完全是一样的。这一组Task就组成了一个Stage，一个Stage的开始就是从外部存储或者shuffle结果中读取数据，一个Stage的结束就是由于发生shuffle
+或者生成结果时，而一个Job则包含多个Stage。
+
+
+然后创建job，最后进行提交job。提交的job如果满足
 以下四个条件，将以本地模式运行：
 (1) spark.localExecution.enable设置为true
 (2) 用户程序显式指定可以本地运行

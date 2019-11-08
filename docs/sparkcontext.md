@@ -7,11 +7,11 @@
 
 对于该图官网有几点说明：
 
-  (1) 不同的Spark应用程序对应着不同的Executor，这些Executor在整个应用程序执行期间都存在，并且可以以多线程的方式执行Task。(Hmmmm....回忆
-一下，Storm中也有Executor，但Storm中的Executor是一个单独的线程，默认里面有一个Task，如果设置多个，同一个Executor中的Task必须是同类型的，
-要么是Spout，要么是bolt，并且多个Task以串形方式执行。Flink中呢没有Executor，与之对应的个人觉得应该是Slot，Slot中以多线程的方式运行Task，
-每个Task是一个线程。)Spark这样左的好处是，各个Spark应用程序的执行是相互隔离的，除了Spark应用程序向外部存储系统写数据进行数据交互外，无法进行
-其他形式的数据共享。
+  (1) 不同的Spark应用程序对应着不同的Executor，这些Executor在整个应用程序执行期间都存在，并且可以以多线程的方式执行Task，Task是集群上
+运行的基本单位。(Hmmmm....回忆一下，Storm中也有Executor，但Storm中的Executor是一个单独的线程，默认里面有一个Task，如果设置多个，同一个
+Executor中的Task必须是同类型的，要么是Spout，要么是bolt，并且多个Task以串形方式执行，因此Storm中运行的基本单位其实是Executor。Flink中
+呢没有Executor，与之对应的个人觉得应该是Slot，Slot中以多线程的方式运行Task，每个Task是一个线程，因此Flink中运行的基本单位也是Task。)
+Spark这样左的好处是，各个Spark应用程序的执行是相互隔离的，除了Spark应用程序向外部存储系统写数据进行数据交互外，无法进行其他形式的数据共享。
 
   (2) Spark对于其使用的集群资源管理器没有感知能力，只要它能申请Executor并与之通信即可。这样设计的好处是，无论使用哪种资源管理器，执行流程都是
 确定的，它不受资源管理器的限制，可以随意替换其资源管理器。
