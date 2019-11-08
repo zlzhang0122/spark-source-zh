@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="72d48bf4-1035-4281-9c36-fe255145a3b7" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/jobsubmit.md" afterPath="$PROJECT_DIR$/docs/jobsubmit.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/sparkcontext.md" afterPath="$PROJECT_DIR$/docs/sparkcontext.md" />
-    </list>
+    <list default="true" id="72d48bf4-1035-4281-9c36-fe255145a3b7" name="Default" comment="" />
     <ignored path="spark-source-zh.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -68,8 +65,8 @@
       <file leaf-file-name="jobsubmit.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docs/jobsubmit.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+            <state relative-caret-position="-44">
+              <caret line="14" column="28" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -109,8 +106,7 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-45" />
-    <option name="y" value="209" />
+    <option name="y" value="23" />
     <option name="width" value="1280" />
     <option name="height" value="709" />
   </component>
@@ -675,16 +671,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1572863219612</updated>
-      <workItem from="1572863220963" duration="23605000" />
+      <workItem from="1572863220963" duration="23636000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23605000" />
+    <option name="totallyTimeSpent" value="23636000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-45" y="209" width="1280" height="709" extended-state="0" />
-    <editor active="true" />
+    <frame x="0" y="23" width="1280" height="709" extended-state="6" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -762,8 +758,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/jobsubmit.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+        <state relative-caret-position="-44">
+          <caret line="14" column="28" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
           <folding />
         </state>
       </provider>
