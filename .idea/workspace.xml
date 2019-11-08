@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="72d48bf4-1035-4281-9c36-fe255145a3b7" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/docs/RDD记录.md" afterPath="$PROJECT_DIR$/docs/rdd.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/stage.md" afterPath="$PROJECT_DIR$/docs/stage.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
     <ignored path="spark-source-zh.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,17 +25,17 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+            <state relative-caret-position="210">
+              <caret line="14" column="38" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="stage.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="stage.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/docs/stage.md">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="105">
@@ -92,9 +91,9 @@
         <option value="$PROJECT_DIR$/docs/RDD记录.md" />
         <option value="$PROJECT_DIR$/docs/submit.md" />
         <option value="$PROJECT_DIR$/docs/sparkcontext.md" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/docs/jobsubmit.md" />
         <option value="$PROJECT_DIR$/docs/stage.md" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -677,12 +676,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1572863219612</updated>
-      <workItem from="1572863220963" duration="26110000" />
+      <workItem from="1572863220963" duration="26205000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26110000" />
+    <option name="totallyTimeSpent" value="26205000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="20" y="23" width="1280" height="709" extended-state="0" />
@@ -730,14 +729,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/image/schedulerbackend.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -789,6 +780,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="55" selection-start-line="7" selection-start-column="55" selection-end-line="7" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="38" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
           <folding />
         </state>
       </provider>
