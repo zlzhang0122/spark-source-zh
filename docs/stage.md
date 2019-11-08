@@ -5,6 +5,6 @@
 的划分，生成TaskSet，并由TaskScheduler向集群申请资源，最终在Worker节点的Executor进程中执行Task。
 
 先看一下如何进行Stage的划分，如下图所示是对应Spark应用程序代码生成的Stage。它根据RDD的依赖关系进行划分，在遇到宽窄依赖时将两个RDD划分为不同
-的Stage。
+的Stage(什么是宽依赖，什么是窄依赖，可以看[Spark源码阅读：RDD操作](./rdd.md)进行了解)。
 
 ![Stage划分](../image/stage.png "Stage划分")
