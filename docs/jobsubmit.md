@@ -4,6 +4,14 @@
 并且以数据的方式返回结果，它是Spark里所有action的主入口。它内部是调用dagScheduler的runJob方法执行，runJob方法中通过submitJob方法进行任务的
 提交，并返回JobWaiter对象，该对象会等待job的执行完成，然后传递所有的结果到resultHandler方法进行后续的处理。
 
+调用关系如下：
+org.apache.spark.SparkContext#runJob
+org.apache.spark.scheduler.DAGScheduler#runJob
+org.apache.spark.scheduler.DAGScheduler#submitJob
+org.apache.spark.scheduler.DAGSchedulerEventProcessLoop#onReceive（JobSubmitted）
+org.apache.spark.scheduler.DAGSchedulerEventProcessLoop#doOnReceive（JobSubmitted）
+org.apache.spark.scheduler.DAGScheduler#handleJobSubmitted
+
 在submitJob方法中进行提交前，会先进行必要的检查以确保没有在一个不存在的分区上提交任务。在创建jobId后创建JobWaiter对象，并使用类型为DAGSchedulerEventProcessLoop
 的对象eventProcessLoop，将任务提交JobSubmitted对象放置在event队列中，eventThread后台线程将对任务提交进行处理，这个eventThread被定义在DAGSchedulerEventProcessLoop
 的父类EventLoop当中。EventLoop就是从调用者接收事件并且启动给一个额外的eventThread对所有在eventThread中的事件进行处理。(值得注意的是在EventLoop中，事件队列
