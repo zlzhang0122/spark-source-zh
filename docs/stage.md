@@ -8,3 +8,6 @@
 的Stage(什么是宽依赖，什么是窄依赖，可以看[Spark源码阅读：RDD操作](./rdd.md)进行了解)。
 
 ![Stage划分](../image/stage.png "Stage划分")
+
+在上图中可以看到，RDD G与RDD F间的依赖是宽依赖，所以RDD F与RDD G被划分为不同的Stage，而RDD B与RDD G之间是窄依赖，因此RDD B与RDD G被
+划分为同一个Stage。通过这种递归的调用方式，将所有的RDD进行划分。
