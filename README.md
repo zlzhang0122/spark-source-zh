@@ -12,6 +12,6 @@
 
 
 
-### 扩展阅读
+### 扩展
 
 * [Spark扩展阅读：RDD操作](../master/docs/rdd.md)
