@@ -8,6 +8,8 @@
 
 * [Spark源码阅读4：Stage的划分](../master/docs/stage.md)
 
+* [Spark源码阅读5：Stage的提交](../master/docs/stagesubmit.md)
+
 
 
 ### 扩展阅读
