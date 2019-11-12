@@ -18,3 +18,11 @@ RDD的依赖关系可以分为两种：
 (2) 宽依赖：父RDD的每个分区被其子RDD的多个分区所依赖，子RDD的每个分区的生产与父RDD的数据规模相关.
 
 区分宽依赖与窄依赖的原因是：窄依赖关系的RDD在集群的节点的内存中可以以流水线(pipeline)的方式高效运行.
+
+创建RDD:
+(1) 对驱动程序中的集合进行并行化的处理，包括：makeRDD、parallelize，区别是makeRDD可以指定每一个分区preferredLocations参数
+(2) 读取外部存储系统(HDFS、Hbase、Hive等)，包括：文本文件、SequenceFile、Avro、Parquet等，其中textFile支持.gz格式的压缩文件读取
+(3) 基于已有RDD的转换
+
+RDD的执行操作：first、count、collect、take
+
