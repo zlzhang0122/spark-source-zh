@@ -7,5 +7,20 @@ org.apache.spark.scheduler.DAGScheduler.handleJobSubmitted.submitStage
 org.apache.spark.scheduler.DAGScheduler.handleJobSubmitted.submitMissingTasks
 org.apache.spark.scheduler.TaskScheduler.submitTasks
 
-在handleJobSubmitted方法中，在创建好finalStage并做好相关的设置后，最后会调用submitStage将其进行提交，在通过submitStage提交finalStage时，
-方法会递归的将finalStage依赖的父stage先提交，最后再提交finalStage。
+在handleJobSubmitted方法中，首先调用createResultStage()方法，生成Stage，包括最后一个Stage：ResultStage和前面的Parent Stage：ShuffleMapStage，
+随后创建一个ActiveJob对象job，并清除RDD分区位置缓存，调用logInfo()方法记录日志信息，维护各种数据对应关系涉及到的数据结构：(1) 将jobId-->ActiveJob
+的对应关系添加到HashMap类型的数据结构jobIdToActiveJob中去; (2) 将ActiveJob添加到HashSet类型的数据结构activeJobs中去。最后，提交Stage。
+下面进行具体的分析：在调用createResultStage()方法时，先根据final RDD获取parent stages，如果在获取的过程中某个shuffle map stage不存在，则会先创建它并创建
+它的对应的所有祖先Stage。然后创建一个ResultStage，其id是通过AtomicInteger类型的getAndIncrement()获得，能够保证原子性，这个ResultStage就是整个Job的final Stage，将这个Stage加入到数据结构stageIdToStage中，
+并更新数据结构jobIdToStageIds，最后将这个ResultStage返回。
+
+在创建好finalStage并做好相关的设置后，最后会调用submitStage将其进行提交，在通过submitStage提交finalStage时，
+方法会递归的将finalStage依赖的父stage先提交，最后再提交finalStage，提交时调用submitMissingTasks方法。
+
+在submitMissingTasks方法中，首先判断stage是否是ShuffleMapStage，在DAG Stage中，除了最后的Stage外，其余的全部都是ShuffleMapStage。如果是
+ShuffleMapStage，并且计算结果不可用，则先执行中间Stage的清理工作，
+
+
+则判断Stage中是否缓存了需要计算的partition的结果；如果是Result类型的Final Stage，则判断计算Job中该Partition是否已经完成。
+
+
