@@ -10,9 +10,10 @@ org.apache.spark.scheduler.TaskScheduler.submitTasks
 
 ![stagesubmit调用链](../image/stagesubmit.png "stagesubmit调用链图")
 
-    在handleJobSubmitted方法中，首先调用createResultStage()方法，生成Stage，包括最后一个Stage：ResultStage和前面的Parent Stage：ShuffleMapStage，
-随后创建一个ActiveJob对象job，并清除RDD分区位置缓存，调用logInfo()方法记录日志信息，维护各种数据对应关系涉及到的数据结构：(1) 将jobId-->ActiveJob
-的对应关系添加到HashMap类型的数据结构jobIdToActiveJob中去; (2) 将ActiveJob添加到HashSet类型的数据结构activeJobs中去。最后，提交Stage。
+    在handleJobSubmitted方法中，首先调用createResultStage()方法，生成Stage，包括最后一个Stage：ResultStage和前面的
+    Parent Stage：ShuffleMapStage，随后创建一个ActiveJob对象job，并清除RDD分区位置缓存，调用logInfo()方法记录日志信
+    息，维护各种数据对应关系涉及到的数据结构：(1) 将jobId-->ActiveJob的对应关系添加到HashMap类型的数据结构
+    jobIdToActiveJob中去; (2) 将ActiveJob添加到HashSet类型的数据结构activeJobs中去。最后，提交Stage。
 
     下面进行具体的分析：在调用createResultStage()方法时，先根据final RDD获取parent stages，如果在获取的过程中某个shuffle map stage不存在，则会先创建它并创建
 它的对应的所有祖先Stage。然后创建一个ResultStage，其id是通过AtomicInteger类型的getAndIncrement()获得，能够保证原子性，这个ResultStage就是整个Job的final Stage，
