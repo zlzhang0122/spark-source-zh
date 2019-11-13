@@ -39,6 +39,9 @@ abortStage()方法放弃该stage。如果jobId已经定义，则需要判断该s
 方法每次都能返回所有的分区。具体办法是判断stage是否是ShuffleMapStage，在DAG Stage中，除了最后的Stage外，其余的全部都是ShuffleMapStage。如果是ShuffleMapStage，并且
 还没有被提交，则先执行中间Stage的清理工作。然后调用findMissingPartitions()方法确定该stage需要计算的分区ID索引，保存到partitionsToCompute。将stage加入到runningStages
 中去，标记stage正在运行。当一个stage启动时，需要先调用outputCommitCoordinator的stageStart进行初始化。然后创建一个Map：taskIdToLocations，存储的是id->Seq[TaskLocation]
-的映射关系，并对stage中指定RDD的每个分区获取位置信息，映射成id->Seq[TaskLocation]的关系。标记新的attempt关系
+的映射关系，并对stage中指定RDD的每个分区获取位置信息，映射成id->Seq[TaskLocation]的关系，注意此处的getPreferredLocs()方法，很重要，它用于保证数据的本地性，是task获取最佳
+执行位置的算法。标记新的stage attempt关系，并发送一个SparkListenerStageSubmitted事件。对stage进行序列化并广播，此时有两种情况，如果是ShuffleMapStage，则序列化rdd和
+shuffleDep；如果是ResultStage，序列化rdd和func。接下来是一个比较重要的步骤，针对stage的每个分区构造task，形成tasks，因此stage的每个分区都会对应一个task，其中ShuffleMapStage
+生成ShuffleMapTasks，ResultStage生成ResultTasks。如果tasks不为空，则利用taskScheduler.submitTasks()提交task，否则标记stage已完成。
 
 
