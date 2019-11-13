@@ -7,6 +7,8 @@ org.apache.spark.scheduler.DAGScheduler.handleJobSubmitted.submitStage
 org.apache.spark.scheduler.DAGScheduler.handleJobSubmitted.submitMissingTasks
 org.apache.spark.scheduler.TaskScheduler.submitTasks
 
+![SchedulerBackend类图](../image/schedulerbackend.png "SchedulerBackend类图")
+
 在handleJobSubmitted方法中，首先调用createResultStage()方法，生成Stage，包括最后一个Stage：ResultStage和前面的Parent Stage：ShuffleMapStage，
 随后创建一个ActiveJob对象job，并清除RDD分区位置缓存，调用logInfo()方法记录日志信息，维护各种数据对应关系涉及到的数据结构：(1) 将jobId-->ActiveJob
 的对应关系添加到HashMap类型的数据结构jobIdToActiveJob中去; (2) 将ActiveJob添加到HashSet类型的数据结构activeJobs中去。最后，提交Stage。
