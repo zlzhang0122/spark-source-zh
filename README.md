@@ -10,6 +10,7 @@
 
 * [Spark源码阅读5：Stage的提交](../master/docs/stagesubmit.md)
 
+* [Spark源码阅读6：Task调度](../master/docs/taskschedule.md)
 
 
 ### 扩展阅读
