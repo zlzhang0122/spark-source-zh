@@ -37,35 +37,8 @@
       <file leaf-file-name="stagesubmit.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docs/stagesubmit.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="73" selection-start-line="9" selection-start-column="73" selection-end-line="9" selection-end-column="73" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="schedulerbackend.png" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/image/schedulerbackend.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="stage.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docs/stage.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="1" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="39" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="sparkcontext.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docs/sparkcontext.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="445">
-              <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="73" />
+            <state relative-caret-position="120">
+              <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -683,12 +656,12 @@
       <updated>1572863219612</updated>
       <workItem from="1572863220963" duration="30513000" />
       <workItem from="1573467162361" duration="2506000" />
-      <workItem from="1573549274508" duration="6947000" />
+      <workItem from="1573549274508" duration="7135000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39966000" />
+    <option name="totallyTimeSpent" value="40154000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="7" y="36" width="1280" height="709" extended-state="0" />
@@ -787,21 +760,11 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/image/spark.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/docs/submit.md">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="14" selection-start-line="0" selection-start-column="14" selection-end-line="0" selection-end-column="14" />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/image/stage.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/jobsubmit.md">
@@ -847,10 +810,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/image/stagesubmit.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/image/stage.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/image/spark.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/docs/stagesubmit.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="73" selection-start-line="9" selection-start-column="73" selection-end-line="9" selection-end-column="73" />
+        <state relative-caret-position="120">
+          <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
           <folding />
         </state>
       </provider>
