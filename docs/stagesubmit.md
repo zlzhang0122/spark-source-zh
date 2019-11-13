@@ -39,6 +39,6 @@ abortStage()方法放弃该stage。如果jobId已经定义，则需要判断该s
 方法每次都能返回所有的分区。具体办法是判断stage是否是ShuffleMapStage，在DAG Stage中，除了最后的Stage外，其余的全部都是ShuffleMapStage。如果是ShuffleMapStage，并且
 还没有被提交，则先执行中间Stage的清理工作。然后调用findMissingPartitions()方法确定该stage需要计算的分区ID索引，保存到partitionsToCompute。将stage加入到runningStages
 中去，标记stage正在运行。当一个stage启动时，需要先调用outputCommitCoordinator的stageStart进行初始化。然后创建一个Map：taskIdToLocations，存储的是id->Seq[TaskLocation]
-的映射关系，并对stage中指定RDD的每个分区获取位置信息，映射成id->Seq[TaskLocation]的关系。
+的映射关系，并对stage中指定RDD的每个分区获取位置信息，映射成id->Seq[TaskLocation]的关系。标记新的attempt关系
 
 
