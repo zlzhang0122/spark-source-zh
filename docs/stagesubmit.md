@@ -10,12 +10,11 @@ org.apache.spark.scheduler.TaskScheduler.submitTasks
 
 ![stagesubmit调用链](../image/stagesubmit.png "stagesubmit调用链图")
 
-    在handleJobSubmitted方法中，首先调用createResultStage()方法，生成Stage，包括最后一个Stage：ResultStage和前面的
-    Parent Stage：ShuffleMapStage，随后创建一个ActiveJob对象job，并清除RDD分区位置缓存，调用logInfo()方法记录日志信
-    息，维护各种数据对应关系涉及到的数据结构：(1) 将jobId-->ActiveJob的对应关系添加到HashMap类型的数据结构
-    jobIdToActiveJob中去; (2) 将ActiveJob添加到HashSet类型的数据结构activeJobs中去。最后，提交Stage。
+在handleJobSubmitted方法中，首先调用createResultStage()方法，生成Stage，包括最后一个Stage：ResultStage和前面的Parent Stage：ShuffleMapStage，随后
+创建一个ActiveJob对象job，并清除RDD分区位置缓存，调用logInfo()方法记录日志信息，维护各种数据对应关系涉及到的数据结构：(1) 将jobId-->ActiveJob的对应关系
+添加到HashMap类型的数据结构jobIdToActiveJob中去; (2) 将ActiveJob添加到HashSet类型的数据结构activeJobs中去。最后，提交Stage。
 
-    下面进行具体的分析：在调用createResultStage()方法时，先根据final RDD获取parent stages，如果在获取的过程中某个shuffle map stage不存在，则会先创建它并创建
+下面进行具体的分析：在调用createResultStage()方法时，先根据final RDD获取parent stages，如果在获取的过程中某个shuffle map stage不存在，则会先创建它并创建
 它的对应的所有祖先Stage。然后创建一个ResultStage，其id是通过AtomicInteger类型的getAndIncrement()获得，能够保证原子性，这个ResultStage就是整个Job的final Stage，
 将这个Stage加入到数据结构stageIdToStage中，并更新数据结构jobIdToStageIds，最后将这个ResultStage返回。
 
@@ -26,7 +25,7 @@ abortStage()方法放弃该stage。如果jobId已经定义，则需要判断该s
 处理，所以必须先等待parent stage的处理。runningStages表示正在运行的stage，正在运行表示已经被提交，无需重复提交。failedStages表示失败的stage，已经失败的stage再次提交
 仍然会失败，所以也无需提交。如果stage不存在于上述三个数据结构中，就可以继续执行后续的提交流程。
 
-    首先，调用getMissingParentStages()方法获取stage还没有提交的parent，即missing。若missing为空，说明该stage要么没有parent stage，要么其parent stages都已经被提交，
+首先，调用getMissingParentStages()方法获取stage还没有提交的parent，即missing。若missing为空，说明该stage要么没有parent stage，要么其parent stages都已经被提交，
 此时该stage就可以被提交，调用submitMissingTasks()进行提交；若missing不为空，说明该stage还存在尚未被提交的parent stages，就需要遍历missing，循环提交每个stage，并将
 该stage添加到waitingStages中，等待其parent stages都被提交后再被提交。在getMissingParentStages()方法中，定义了三个数据结构和一个visit()方法。三个数据结构分别是：
 (1) missing：HashSet[Stage]类型，存储尚未提交的parent stages，用于最后结果的返回；(2) visited：HashSet[RDD[_]]类型，已被处理的RDD集合，位于其中的RDD不会被重复处理；
@@ -36,7 +35,7 @@ abortStage()方法放弃该stage。如果jobId已经定义，则需要判断该s
 栈，等待后续处理，因为窄依赖的RDD同属于同一个stage，加入waitingForVisit只是为了后续继续沿着DAG图继续往上处理。那么，整个missing的获取就一目了然，将final stage即ResultStage
 的RDD压入到waitingForVisit顶部，循环处理即可得到missing。
 
-    在submitMissingTasks方法中，在查找missing(也就是未提交的stages)的分区前，先进行中间状态的清除工作，这个操作能够保证，对于部分完成的中间状态，findMissingPartitions()
+在submitMissingTasks方法中，在查找missing(也就是未提交的stages)的分区前，先进行中间状态的清除工作，这个操作能够保证，对于部分完成的中间状态，findMissingPartitions()
 方法每次都能返回所有的分区。具体办法是判断stage是否是ShuffleMapStage，在DAG Stage中，除了最后的Stage外，其余的全部都是ShuffleMapStage。如果是ShuffleMapStage，并且
 还没有被提交，则先执行中间Stage的清理工作。然后调用findMissingPartitions()方法确定该stage需要计算的分区ID索引，保存到partitionsToCompute。将stage加入到runningStages
 中去，标记stage正在运行。当一个stage启动时，需要先调用outputCommitCoordinator的stageStart进行初始化。然后创建一个Map：taskIdToLocations，存储的是id->Seq[TaskLocation]
