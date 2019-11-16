@@ -8,5 +8,7 @@
 阅读TaskScheduler的源码，可知它主要提供了实力化和销毁时必须的start()和stop()方法，以及提交和取消Tasks的的submitTasks()方法与cancelTasks()方法，并且通过
 executorHeartbeatReceived()方法周期性的接收executor的心跳，更新运行中的tasks的元信息，并通知master告知BlockManager仍然存活。
 
+接下来看一下TaskScheduler最主要的实现类TaskSchedulerImpl，它首先获取到了TaskSet中的tasks，然后使用synchronized进行同步。在同步代码块中，首先创建了TaskSetManager。
+然后获取到了TaskSet对应的stageId。
 
 
