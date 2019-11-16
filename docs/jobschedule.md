@@ -9,6 +9,7 @@
 executorHeartbeatReceived()方法周期性的接收executor的心跳，更新运行中的tasks的元信息，并通知master告知BlockManager仍然存活。
 
 接下来看一下TaskScheduler最主要的实现类TaskSchedulerImpl，它首先获取到了TaskSet中的tasks，然后使用synchronized进行同步。在同步代码块中，首先创建了TaskSetManager。
-然后获取到了TaskSet对应的stageId。
-
+然后获取到了TaskSet对应的stageId，更新数据结构taskSetsByStageIdAndAttempt，将映射关系stageId->[taskSet.stageAttemptId->TaskSetManager]存入，这里的TaskSetManager
+就是上面创建的TaskSetManager，将所有属于该stage的TaskSetManagers标记为僵尸状态，并将TaskSetManager添加到schedulableBuilder中，最后调用SchedulerBackend的
+reviveOffers()。
 
