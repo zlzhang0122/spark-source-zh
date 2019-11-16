@@ -3,5 +3,10 @@
 在[Spark源码阅读5：Stage的提交](./stagesubmit.md)已经说到，最终stage被封装成TaskSet，并使用taskScheduler.submitTasks进行提交。TaskScheduler负责
 低层次任务的调度，每个TaskScheduler为一个特定的SparkContext调度tasks。这些调度器获取到由DAGScheduler为每个stage提交至他们的一组Tasks，并负责将这些tasks
 发送到集群，以执行它们，在它们失败时重试，并减轻掉队情况。Tasks是Task的集合，而submitTasks方法就定义在TaskScheduler Trait当中。Trait是scala中的概念，
-如果没有scala的开发经验，可以大致将其类比于Java中的接口。目前，TaskScheduler只有一个实现TaskSchedulerImpl。
+如果没有scala的开发经验，可以大致将其类比于Java中的接口。目前，TaskScheduler最主要的实现是TaskSchedulerImpl。
+
+阅读TaskScheduler的源码，可知它主要提供了实力化和销毁时必须的start()和stop()方法，以及提交和取消Tasks的的submitTasks()方法与cancelTasks()方法，并且通过
+executorHeartbeatReceived()方法周期性的接收executor的心跳，更新运行中的tasks的元信息，并通知master告知BlockManager仍然存活。
+
+
 
