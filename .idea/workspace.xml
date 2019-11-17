@@ -58,8 +58,8 @@
       <file leaf-file-name="jobschedule.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docs/jobschedule.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="298">
-              <caret line="26" column="21" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
+            <state relative-caret-position="373">
+              <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -114,8 +114,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-265" />
-    <option name="y" value="262" />
+    <option name="x" value="-100" />
+    <option name="y" value="69" />
     <option name="width" value="1280" />
     <option name="height" value="709" />
   </component>
@@ -689,15 +689,15 @@
       <updated>1572863219612</updated>
       <workItem from="1572863220963" duration="30513000" />
       <workItem from="1573467162361" duration="2506000" />
-      <workItem from="1573549274508" duration="18164000" />
+      <workItem from="1573549274508" duration="20536000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51183000" />
+    <option name="totallyTimeSpent" value="53555000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-265" y="262" width="1280" height="709" extended-state="0" />
+    <frame x="-100" y="69" width="1280" height="709" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -878,8 +878,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/jobschedule.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="26" column="21" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
+        <state relative-caret-position="373">
+          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
           <folding />
         </state>
       </provider>
