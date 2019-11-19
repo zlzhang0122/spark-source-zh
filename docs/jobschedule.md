@@ -34,4 +34,4 @@ CoarseGrainedSchedulerBackend调用的，其调用了driverEndpoint的send()方�
 发送的是ReviveOffers消息。这里只是发送，具体处理还要看远端的RpcEndpoint，即DriverEndpoint。通过上面我们可以知道，RpcEndpoint的服务流程为onStart()-->receive()--> onStop()。
 
 每当消息来临时，DriverEndpoint都会调用receive()方法来处理，在其中可以看到其判断是否ReviveOffers事件，若是则调用makeOffers()方法处理，而在makeOffers()方法中，其向所有的executors提供了抽象的资源，
-包括resourceOffers()分配资源，launchTasks()启动tasks。
+包括resourceOffers()分配资源，launchTasks()启动tasks。代码逻辑上看：它先从executorDataMap中过滤掉under killing的executors，得到activeExecutors；
