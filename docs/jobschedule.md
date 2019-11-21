@@ -36,3 +36,8 @@ CoarseGrainedSchedulerBackend调用的，其调用了driverEndpoint的send()方�
 每当消息来临时，DriverEndpoint都会调用receive()方法来处理，在其中可以看到其判断是否ReviveOffers事件，若是则调用makeOffers()方法处理，而在makeOffers()方法中，其向所有的executors提供了抽象的资源，
 包括resourceOffers()分配资源，launchTasks()启动tasks。代码逻辑上看：它先从executorDataMap中过滤掉under killing的executors，得到activeExecutors；然后利用activeExecutors中executorData的
 executorHost、freeCores，获取workOffers，即资源；最后，调用scheduler的resourceOffers()方法，分配资源，并调用launchTasks()方法，启动tasks：这个scheduler就是TaskSchedulerImp。
+
+executorDataMap是CoarseGrainedSchedulerBackend掌握的集群中executor的数据集合，key为String类型的executorId，value为ExecutorData类型的executor详细信息。ExecutorData包含的主要内容如下：
+(1) executorEndpoint：RpcEndpointRef类型，RPC终端的引用，用于数据通信；
+(2) executorAddress：RpcAddress类型，RPC地址，用于数据通信
+(3) executorHost：String类型，executor的主机
