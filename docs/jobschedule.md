@@ -39,5 +39,8 @@ executorHost、freeCores，获取workOffers，即资源；最后，调用schedul
 
 executorDataMap是CoarseGrainedSchedulerBackend掌握的集群中executor的数据集合，key为String类型的executorId，value为ExecutorData类型的executor详细信息。ExecutorData包含的主要内容如下：
 (1) executorEndpoint：RpcEndpointRef类型，RPC终端的引用，用于数据通信；
-(2) executorAddress：RpcAddress类型，RPC地址，用于数据通信
-(3) executorHost：String类型，executor的主机
+(2) executorAddress：RpcAddress类型，RPC地址，用于数据通信；
+(3) executorHost：String类型，executor的主机；
+(4) freeCores：int类型，可用处理器cores；
+(5) totalCores：int类型，处理器cores总数；
+(6) logUrlMap：Map[String, String]类型，日志url映射集合。
