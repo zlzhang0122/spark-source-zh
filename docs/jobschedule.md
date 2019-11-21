@@ -46,3 +46,6 @@ executorDataMap是CoarseGrainedSchedulerBackend掌握的集群中executor的数�
 (6) logUrlMap：Map[String, String]类型，日志url映射集合；
 (7) attributes：Map[String, String]类型，属性值；
 (8) resourcesInfo：Map[String, String]类型，executor上当前可用资源的信息。
+通过以上信息我们就能知道集群当前executor的负载情况，方便资源分析并调度任务。
+那么executorDataMap内的数据是何时及如何更新的呢？对于第一步中，过滤掉under killing的executors，其实现是对executorDataMap中的所有executor调用executorIsAlive()方法中，判断是否在
+executorsPendingToRemove和executorsPendingLossReason两个数据结构中，这两个数据结构中的executors都是即将移除或者已丢失的executor。
