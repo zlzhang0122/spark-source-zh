@@ -43,4 +43,6 @@ executorDataMap是CoarseGrainedSchedulerBackend掌握的集群中executor的数�
 (3) executorHost：String类型，executor的主机；
 (4) freeCores：int类型，可用处理器cores；
 (5) totalCores：int类型，处理器cores总数；
-(6) logUrlMap：Map[String, String]类型，日志url映射集合。
+(6) logUrlMap：Map[String, String]类型，日志url映射集合；
+(7) attributes：Map[String, String]类型，属性值；
+(8) resourcesInfo：Map[String, String]类型，executor上当前可用资源的信息。
