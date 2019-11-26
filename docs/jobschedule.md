@@ -49,5 +49,35 @@ executorDataMap是CoarseGrainedSchedulerBackend掌握的集群中executor的数�
 通过以上信息我们就能知道集群当前executor的负载情况，方便资源分析并调度任务。
 那么executorDataMap内的数据是何时及如何更新的呢？对于第一步中，过滤掉under killing的executors，其实现是对executorDataMap中的所有executor调用executorIsAlive()方法中，判断是否在
 executorsPendingToRemove和executorsPendingLossReason两个数据结构中，这两个数据结构中的executors都是即将移除或者已丢失的executor。
-
 在过滤掉已失效或者马上要失效的executor后，利用activeExecutors中executorData的executorHost、freeCores，构造workOffers，即资源，这个workOffers更简单，是一个WorkerOffer对象，它代表了系统的可利用资源。
+
+在最重要的第三步，先是调用scheduler.resourceOffers(workOffers)，即TaskSchedulerImpl的resourceOffers()方法，然后再调用launchTasks()方法将tasks加载到executor上去执行。
+在TaskSchedulerImpl的resourceOffers()方法中，主体流程如下：
+1、设置标志位newExecAvail为false，这个标志位是在新的slave被添加时被设置的一个标志，下面在计算任务的本地性规则时会用到；
+
+2、循环offers，WorkerOffer为包含executorId、host、cores的结构体，代表集群中的可用executor资源：
+2.1、更新executorIdToHost，executorIdToHost为利用HashMap存储executorId->host映射的集合；
+2.2、更新executorIdToTaskCount，executorIdToTaskCount为每个executor上运行的task的数目集合，这里如果之前没有的话，初始化为0；
+
+2.3、如果新的slave加入：
+2.3.1、executorsByHost中添加一条记录，key为host，value为new HashSet[String]()；
+2.3.2、发送一个ExecutorAdded事件，并由DAGScheduler的handleExecutorAdded()方法处理；
+2.3.3、新的slave加入时，标志位newExecAvail设置为true；
+
+2.4、更新hostsByRack；
+
+3、随机shuffle offers（集群中可用executor资源）以避免总是把任务放在同一组workers上执行；
+
+4、构造一个task列表，以分配到每个worker，针对每个executor按照其上的cores数目构造一个cores数目大小的ArrayBuffer，实现最大程度并行化；
+
+5、获取可以使用的cpu资源availableCpus；
+
+6、调用Pool.getSortedTaskSetQueue()方法获得排序好的task集合，即sortedTaskSets；
+
+7、循环sortedTaskSets中每个taskSet：
+7.1、如果存在新加入的slave，则调用taskSet的executorAdded()方法，动态调整位置策略级别，这么做很容易理解，新的slave节点加入了，那么随之而来的是数据有可能存在于它上面，那么这时我们就需要重新调整任务本地性规则；
+
+8、循环sortedTaskSets，按照位置本地性规则调度每个TaskSet，最大化实现任务的本地性：
+8.1、对每个taskSet，调用resourceOfferSingleTaskSet()方法进行任务集调度；
+
+9、设置标志位hasLaunchedTask，并返回tasks。
