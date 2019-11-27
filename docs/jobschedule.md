@@ -58,13 +58,14 @@ executorsPendingToRemove和executorsPendingLossReason两个数据结构中，这
 2、循环offers，WorkerOffer为包含executorId、host、cores的结构体，代表集群中的可用executor资源：
 2.1、更新executorIdToHost，executorIdToHost为利用HashMap存储executorId->host映射的集合；
 2.2、更新executorIdToTaskCount，executorIdToTaskCount为每个executor上运行的task的数目集合，这里如果之前没有的话，初始化为0；
-
 2.3、如果新的slave加入：
 2.3.1、executorsByHost中添加一条记录，key为host，value为new HashSet[String]()；
 2.3.2、发送一个ExecutorAdded事件，并由DAGScheduler的handleExecutorAdded()方法处理；
 2.3.3、新的slave加入时，标志位newExecAvail设置为true；
-
 2.4、更新hostsByRack；
+总结起来说，就是对集群中的可用executor资源offers的循环处理，更新一些数据结构，并且，在新的slave加入时，标志位newExecAvail设置为true，并且发送一个ExecutorAdded事件，交由DAGScheduler的handleExecutorAdded()方法处理。
+在handleExecutorAdded()方法中，先将对应host从failedEpoch中移除，failedEpoch存储的是系统探测到的失效节点的集合，存储的是execId->host的对应关系。
+接下来便是调用submitWaitingStages()方法提交等待的stages。
 
 3、随机shuffle offers（集群中可用executor资源）以避免总是把任务放在同一组workers上执行；
 
