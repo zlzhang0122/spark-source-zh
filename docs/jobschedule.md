@@ -67,7 +67,9 @@ executorsPendingToRemove和executorsPendingLossReason两个数据结构中，这
 在handleExecutorAdded()方法中，先将对应host从failedEpoch中移除，failedEpoch存储的是系统探测到的失效节点的集合，存储的是execId->host的对应关系。
 接下来便是调用submitWaitingStages()方法提交等待的stages。
 
-3、随机shuffle offers（集群中可用executor资源）以避免总是把任务放在同一组workers上执行；
+3、随机shuffle offers（集群中可用executor资源）以避免总是把任务放在同一组workers上执行，是为了避免热点问题而采取的一种随机策略。
+
+
 
 4、构造一个task列表，以分配到每个worker，针对每个executor按照其上的cores数目构造一个cores数目大小的ArrayBuffer，实现最大程度并行化；
 
