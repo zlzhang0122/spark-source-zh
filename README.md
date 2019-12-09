@@ -17,4 +17,4 @@
 
 * [Spark扩展阅读：RDD操作](../master/docs/rdd.md)
 * [Spark扩展阅读：Scala语法](../master/docs/scala.md)
-* [Spark扩展阅读：Spark运行架构](../master/docs/scala.md)
+* [Spark扩展阅读：Spark运行架构](../master/docs/runtime.md)
