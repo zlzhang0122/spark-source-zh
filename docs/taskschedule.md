@@ -69,13 +69,14 @@ executorsPendingToRemove和executorsPendingLossReason两个数据结构中，这
 
 3、随机shuffle offers（集群中可用executor资源）以避免总是把任务放在同一组workers上执行，是为了避免热点问题而采取的一种随机策略。
 
-
-
 4、构造一个task列表，以分配到每个worker，针对每个executor按照其上的cores数目构造一个cores数目大小的ArrayBuffer，实现最大程度并行化；
 
 5、获取可以使用的cpu资源availableCpus；
 
 6、调用Pool.getSortedTaskSetQueue()方法获得排序好的task集合，即sortedTaskSets；
+首先，创建一个ArrayBuffer，用来存储TaskSetManager，然后，对Pool中已经存储好的TaskSetManager，即schedulableQueue队列，按照taskSetSchedulingAlgorithm
+调度规则或算法来排序(包括FIFO和Fair两种)，得到sortedSchedulableQueue，并循环其内的TaskSetManager，通过其getSortedTaskSetQueue()方法来填充sortedTaskSetQueue，
+最后返回。TaskSetManager的getSortedTaskSetQueue()方法也很简单，追加ArrayBuffer[TaskSetManager]即可。
 
 7、循环sortedTaskSets中每个taskSet：
 7.1、如果存在新加入的slave，则调用taskSet的executorAdded()方法，动态调整位置策略级别，这么做很容易理解，新的slave节点加入了，那么随之而来的是数据有可能存在于它上面，那么这时我们就需要重新调整任务本地性规则；
