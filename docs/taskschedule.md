@@ -78,6 +78,11 @@ executorsPendingToRemove和executorsPendingLossReason两个数据结构中，这
 调度规则或算法来排序(包括FIFO和Fair两种)，得到sortedSchedulableQueue，并循环其内的TaskSetManager，通过其getSortedTaskSetQueue()方法来填充sortedTaskSetQueue，
 最后返回。TaskSetManager的getSortedTaskSetQueue()方法也很简单，追加ArrayBuffer[TaskSetManager]即可。
 
+先分析FIFO调度策略，代码在SchedulingAlgorithm.scala中，逻辑上很简单，就是先比较两个TaskSetManager的优先级priority，优先级相同再比较stageId，而priority在
+TaskSet生成时确定，就是jobId，也就是FIFO是先按照Job的顺序再按照Stage的顺序进行顺序调度，一个Job完了再调度另一个Job，Job内是按照Stage的顺序进行调度。
+
+再分析Fair调度策略，逻辑主要如下：
+
 7、循环sortedTaskSets中每个taskSet：
 7.1、如果存在新加入的slave，则调用taskSet的executorAdded()方法，动态调整位置策略级别，这么做很容易理解，新的slave节点加入了，那么随之而来的是数据有可能存在于它上面，那么这时我们就需要重新调整任务本地性规则；
 
