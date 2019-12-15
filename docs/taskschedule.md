@@ -85,8 +85,11 @@ TaskSet生成时确定，就是jobId，也就是FIFO是先按照Job的顺序再�
   (1) 优先看正在运行的tasks数目是否小于最小共享cores数，如果两者只有一个小于，则优先调度小于的那个，原因是既然正在运行的Tasks数目小于共享cores数，说明
   该节点资源比较充足，应该优先利用;
   (2) 如果不是只有一个正在运行的tasks数目小于最小共享cores数的话，则再判断正在运行的tasks数目与最小共享cores数的比率;
-  (3) 最后再比较权重使用率，即正在运行的tasks数目与该TaskSetManager的权重weight的比，weight带白哦调度池对资源获取的权重，越大需要越多的资源;
+  (3) 最后再比较权重使用率，即正在运行的tasks数目与该TaskSetManager的权重weight的比，weight代表调度池对资源获取的权重，越大需要越多的资源;
 至此，就获得了排序好的task集合。
+
+总结FIFO和Fair两种调度模式，实际上FIFO就是提交的job都是顺序执行的，后提交的job一定要等到之前提交的job完全执行结束后才可以执行，而 Fair是说，如果之前
+提交的job没有用完集群资源的话，后提交的job可以即刻开始运行。
 
 7、循环sortedTaskSets中每个taskSet：
 7.1、如果存在新加入的slave，则调用taskSet的executorAdded()方法，即TaskSetManager的executorAdded()方法，动态调整位置策略级别，这么做很容易理解，新的slave节点
