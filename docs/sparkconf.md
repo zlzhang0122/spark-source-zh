@@ -1,6 +1,6 @@
 ### SparkConf
 
-SparkConf负责管理Spark的配置相关项，通过它可以灵活的配置任务运行的各种参数，使程序更快更好的运行。
+SparkConf负责管理Spark的配置相关项，是初始化SparkContext的前提，通过它可以灵活的配置任务运行的各种参数，使程序更快更好的运行。
 
 首先，看下SparkConf类的构造方法。首先它通过import语句从SparkConf的伴生对象中导入配置项，主要用于管理过期的、与旧版本兼容的配置项和日志输出。
 需要注意的是，Scala中没有Java中的static的概念，类的伴生对象中维护的成员和方法就可以看作是类的静态成员和静态方法。
@@ -20,7 +20,11 @@ SparkConf内部采用settings存储所有配置，它是ConcurrentHashMap类的�
   * 克隆SparkConf，SparkConf类继承了Cloneable(这是个trait修饰的特征，有点类似于java中的接口，但功能更多)，并覆盖了clone()方法，它是可以深度克隆的。虽然已经使用
   ConcurrentHashMap结构来保证并发时的线程安全，但高并发场景下的锁机制还是会带来性能问题，我们可以通过克隆SparkConf的方式让多个组件获得同样的配置。
 
-
 SparkConf也提供了一些方法来快速设置常用的配置项，例如在大数据的HelloWorld--WordCount程序中，通过setMaster()和setAppName()来进行master和appName的
 设置，它们最终也会调用set()方法。
 
+可以通过get方法获取配置，get方法同样有很多重载的实现，在实现上它会同时检查过期的配置(getDeprecatedConfig()方法是在SparkConf的伴生对象中定义的)，并使用Scala的Option对
+返回结果进行包装，可以实现对为空和不为空的情况进行处理。
+
+SparkConf中还有一个validateSettings()方法，它用来对不合法的配置或过期配置进行校验，并对不合法的配置抛出异常，这个方法不是幂等的，它可能会对配置对象进行转换以将过期的配置
+转换为支持的配置。
