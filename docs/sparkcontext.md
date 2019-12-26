@@ -23,12 +23,23 @@ Spark这样做的好处是，各个Spark应用程序的执行是相互隔离的�
   另外，图中DriverProgram就是用户提交的程序，里面就定义有SparkContext的的实例。SparkContext默认的构造函数接受的是org.apache.spark.SparkConf，
 通过这个参数我们可以自定义提交的参数，这个参数会覆盖系统提供的默认配置。
 
-SparkContext初始化了很多的组件，并且使用其预先定义的私有变量字段维护了其需要初始化的组件的内部状态。下面对这些组件做一些简要的介绍：
+SparkContext初始化了很多的组件，并且使用其预先定义的私有变量字段维护了其需要初始化的组件的内部状态。下图是SparkContext负责初始化的组件一览：
+![Spark架构图](../image/spark-context.png "SparkContext组件图")
+
+下面对这些组件做一些简要的介绍：
   * SparkConf，这个在[Spark源码阅读1：SparkConf](../master/docs/sparkconf.md)中已经介绍过，它是构造SparkContext时传进来的参数。SparkContext
   会先将传进来的SparkConf克隆一份(此时就理解了为何SparkConf需要继承了Cloneable这个trait)，然后在克隆出的副本上进行校验(主要是应用名和Master的校验)，
   并且添加一些其它的必要的参数(Driver的地址、应用ID等)。克隆出来的SparkConf使得用户不可以再更改配置项，保证了Spark配置在运行时的不可变性。
-  * LiveListenerBus，
-
+  * LiveListenerBus，是SparkContext中的事件总线，它异步的将监听器事件(SparkListenerEvents)传递给已经注册的监听器(SparkListeners)，这是一种
+  监听器设计模式，Spark中大量的应用了这种设计模式以适应集群环境下的分布式事件汇报。除了LiveListenerBus外，Spark中还有其它多种事件总线，它们都继承自
+  ListenerBus特征(trait)，事件总线是Spark底层重要的支撑组件。
+  * AppStatusStore，看名字就知道是一个存储支撑组件，它提供Spark程序运行过程中各项指标的键值对存储，UI上看到的数据指标基本上都存储在这里，底层使用的是
+  ElementTrackingStore，这是一种能够跟踪特定类型的元素的数量并且一旦达到阈值就触发事件的的键值对存储结构，比较适用于监控场景。此外，还会产生一个监听器
+  AppStatusListener实例，并注册到上面的LiveListenerBus中去用来收集监控数据。
+  * SparkEnv，是Spark的执行环境，Driver和Executor都需要SparkEnv提供的各类组件形成的执行环境作为基础，其初始化依赖于LiveListenerBus，且在
+  SparkContext的初始化时只创建了Driver的执行环境，Executor的执行环境将会在后面创建。在创建完成Driver的执行环境后，会使用SparkEnv伴生对象中的set()
+  方法保存它，做到"create once，use anywhere"。通过SparkEnv管理的组件很多，包括安全管理器SecurityManager、RPC环境RpcEnv、存储块管理器
+  BlockManager、监控指标系统MetricsSystem。在SparkContext构造方法中，使用了SparkEnv初始化BlockManager和启动MetricsSystem。
 
 Spark中有几个非常重要的成员：TaskScheduler、HeartbeatReceiver、DAGScheduler。通过createTaskScheduler方法，可以获得不同资源管理类型或
 部署类型的调度器，现阶段支持：local本地单线程、local[k]本地k个线程、local[*]本地cpu核数个线程、spark支持Spark Standalone、yarn支持连接Yarn。
