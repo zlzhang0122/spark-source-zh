@@ -28,7 +28,7 @@ SparkContext初始化了很多的组件，并且使用其预先定义的私有�
 
 下面对这些组件做一些简要的介绍：
   * SparkConf，这个在[Spark源码阅读1：SparkConf](../master/docs/sparkconf.md)中已经介绍过，它是构造SparkContext时传进来的参数。SparkContext
-  会先将传进来的SparkConf克隆一份(此时就理解了为何SparkConf需要继承了Cloneable这个trait)，然后在克隆出的副本上进行校验(主要是应用名和Master的校验)，
+  会先将传进来的SparkConf克隆一份(此时就理解了为何SparkConf需要继承Cloneable这个trait)，然后在克隆出的副本上进行校验(主要是应用名和Master的校验)，
   并且添加一些其它的必要的参数(Driver的地址、应用ID等)。克隆出来的SparkConf使得用户不可以再更改配置项，保证了Spark配置在运行时的不可变性。
 
   * LiveListenerBus，是SparkContext中的事件总线，它异步的将监听器事件(SparkListenerEvents)传递给已经注册的监听器(SparkListeners)，这是一种
@@ -37,16 +37,16 @@ SparkContext初始化了很多的组件，并且使用其预先定义的私有�
 
   * AppStatusStore，看名字就知道是一个存储支撑组件，它提供Spark程序运行过程中各项指标的键值对存储，UI上看到的数据指标基本上都存储在这里，底层使用的是
   ElementTrackingStore，这是一种能够跟踪特定类型的元素的数量并且一旦达到阈值就触发事件的的键值对存储结构，比较适用于监控场景。此外，还会产生一个监听器
-  AppStatusListener实例，并注册到上面的LiveListenerBus中去用来收集监控数据。
+  AppStatusListener实例，并注册到上面的LiveListenerBus中用来收集监控数据。
 
   * SparkEnv，是Spark的执行环境，Driver和Executor都需要SparkEnv提供的各类组件形成的执行环境作为基础，其初始化依赖于LiveListenerBus，且在
   SparkContext的初始化时只创建了Driver的执行环境，Executor的执行环境将会在后面创建。在创建完成Driver的执行环境后，会使用SparkEnv伴生对象中的set()
   方法保存它，做到"create once，use anywhere"。通过SparkEnv管理的组件很多，包括安全管理器SecurityManager、RPC环境RpcEnv、存储块管理器
   BlockManager、监控指标系统MetricsSystem。在SparkContext构造方法中，使用了SparkEnv初始化BlockManager和启动MetricsSystem。
 
-  * SparkStatusTracker，它提供了报告监控任务和stage进度的低级API，从传入的AppStatusStore中获取包括特定job group下的任务列表、活跃的Job ID/Stage ID、
+  * SparkStatusTracker，它提供了汇报监控任务和stage进度的低级API，从传入的AppStatusStore中获取包括特定job group下的任务列表、活跃的Job ID/Stage ID、
   Job信息/Stage信息、Executor信息(包括所在主机、运行端口、缓存大小、运行任务数、内存使用量等基础数据)，这个API只能保证非常弱的一致性语义，它报告的信息会有
-  延迟或缺漏(这个应该还是能够理解，根据分布式系统的CAP理论，这个API既然是分布式环境下的，那么在保证其高可用性的情况下就必须对一致性有所取舍，毕竟不是数据库，
+  延迟或缺漏(这个应该能够理解，根据分布式系统的CAP理论，这个API既然是分布式环境下的，那么在保证其高可用性的情况下就必须对一致性有所取舍，毕竟不是数据库，
   优先选择可用性而舍弃强一致性的保证也是可以接受的，而且既然是接口就也很难做到像大多数分布式系统的设计那样保证最终一致性^-^)。
 
   * ConsoleProgressBar，它按行打印Stage的计算进度，周期性的从AppStatusStore中查询活跃Stage对应的各状态的Task数，并格式化为字符串输出，它可以通过
