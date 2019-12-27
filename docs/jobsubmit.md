@@ -33,7 +33,3 @@ DAGSchedulerEventProcessLoop就是EventLoop的子类，它对onReceive进行了�
 (2) 用户程序显式指定可以本地运行
 (3) finalStage没有父stage
 (4) 仅有一个partition
-
-资源调度SchedulerBackend类及相关子类如下图：
-
-![SchedulerBackend类图](../image/schedulerbackend.png "SchedulerBackend类图")
