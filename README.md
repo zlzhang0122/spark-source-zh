@@ -2,11 +2,11 @@
 
 * [Spark源码阅读1：SparkConf](../master/docs/sparkconf.md)
 
-* [Spark源码阅读2：应用程序提交](../master/docs/submit.md)
+* [Spark源码阅读2：SparkContext主要组件](../master/docs/sparkcontext-components.md)
 
-* [Spark源码阅读3：SparkContext主要组件](../master/docs/sparkcontext-components.md)
+* [Spark源码阅读3：SparkContext其它相关](../master/docs/sparkcontext-other.md)
 
-* [Spark源码阅读4：SparkContext其它相关](../master/docs/sparkcontext-other.md)
+* [Spark源码阅读4：应用程序提交](../master/docs/submit.md)
 
 * [Spark源码阅读5：Spark任务提交](../master/docs/jobsubmit.md)
 
