@@ -1,4 +1,4 @@
-### SparkContext构建
+### SparkContext组件
 
 对Spark有所了解的同学都知道，SparkContext绝对是Spark编程非常重要且经常接触的一个东西，可以说是核心中的核心。它存在于Driver中，是开发Spark应用的入口，
 负责和整个集群的交互，包括申请集群资源、创建RDD、创建累加器和广播变量等。理解Spark的架构就必须从这个入口开始。下图是官网的一张Spark架构图：
