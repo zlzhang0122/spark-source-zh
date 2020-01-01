@@ -17,4 +17,9 @@ ListenerBus中还定义了一些与事件总线相关的方法，以下简单的
   * addListener() & removeListener()方法：分别向事件总线添加事件监听器和移除事件监听器，实现上很简单，就是在并发容器CopyOnWriteArrayList上执行add()
   方法和remove()方法。
   * doPostEvent()方法：将事件event投递给监听器listener进行处理，在此处只进行了抽象定义，具体逻辑在其实现类中。
-  * postToAll()方法：通过doPostEvent()方法，将事件event投递给所有已经注册的监听器，由于它是线程不安全的，因此同时只有被一个线程调用。
+  * postToAll()方法：通过doPostEvent()方法，将事件event投递给所有已经注册的监听器，由于它是线程不安全的，因此同时只能被一个线程调用。
+
+SparkListenerBus这个trait是Spark Core内部事件总线的基类，继承于ListenerBus并实现了doPostEvent()方法来对事件进行匹配，并调用监听器的处理方法。如果无法
+匹配到事件，则调用onOtherEvent()方法。它支持的监听器都是SparkListenerInterface的子类，事件则是SparkListenerEvent的子类。其中，SparkListenerInterface
+定义了每个事件的处理方法，命名规则是"onXXX"，而SparkListenerEvent则是一个没有任何抽象方法的trait，它唯一的用途是以"SparkListener+事件名称"标记具体的事件
+类。
