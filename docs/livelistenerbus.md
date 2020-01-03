@@ -22,4 +22,5 @@ ListenerBus中还定义了一些与事件总线相关的方法，以下简单的
 SparkListenerBus这个trait是Spark Core内部事件总线的基类，继承于ListenerBus并实现了doPostEvent()方法来对事件进行匹配，并调用监听器的处理方法。如果无法
 匹配到事件，则调用onOtherEvent()方法。它支持的监听器都是SparkListenerInterface的子类，事件则是SparkListenerEvent的子类。其中，SparkListenerInterface
 定义了每个事件的处理方法，命名规则是"onXXX"，而SparkListenerEvent则是一个没有任何抽象方法的trait，它唯一的用途是以"SparkListener+事件名称"标记具体的事件
-类。
+类。它默认提供的事件投递方法是同步调用的，如果注册的监听器和产生的事件很多，同步调用必然带来事件的积压和处理的延时，因此在SparkListenerBus的实现类
+AsyncEventQueue中，提供了异步事件队列机制，它也是SparkContext中的事件总线LiveListenerBus的基础。

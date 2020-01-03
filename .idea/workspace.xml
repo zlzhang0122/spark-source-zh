@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="72d48bf4-1035-4281-9c36-fe255145a3b7" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/livelistenerbus.md" afterPath="$PROJECT_DIR$/docs/livelistenerbus.md" />
     </list>
     <ignored path="spark-source-zh.iws" />
@@ -28,8 +29,8 @@
         <entry file="file://$PROJECT_DIR$/docs/livelistenerbus.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="360">
-                <caret line="24" column="2" selection-start-line="24" selection-start-column="2" selection-end-line="24" selection-end-column="2" />
+              <first_editor relative-caret-position="375">
+                <caret line="25" column="69" selection-start-line="25" selection-start-column="69" selection-end-line="25" selection-end-column="69" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -119,8 +120,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-15" />
-    <option name="y" value="205" />
+    <option name="x" value="-29" />
+    <option name="y" value="58" />
     <option name="width" value="1280" />
     <option name="height" value="709" />
   </component>
@@ -149,9 +150,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -200,6 +200,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -717,15 +718,16 @@
       <workItem from="1577025382317" duration="9072000" />
       <workItem from="1577285817453" duration="15896000" />
       <workItem from="1577429946076" duration="12470000" />
-      <workItem from="1577620302145" duration="8484000" />
+      <workItem from="1577620302145" duration="10669000" />
+      <workItem from="1578061250308" duration="208000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="119382000" />
+    <option name="totallyTimeSpent" value="121775000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-15" y="205" width="1280" height="709" extended-state="0" />
+    <frame x="-29" y="58" width="1280" height="709" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1431,8 +1433,8 @@
     <entry file="file://$PROJECT_DIR$/docs/livelistenerbus.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="360">
-            <caret line="24" column="2" selection-start-line="24" selection-start-column="2" selection-end-line="24" selection-end-column="2" />
+          <first_editor relative-caret-position="375">
+            <caret line="25" column="69" selection-start-line="25" selection-start-column="69" selection-end-line="25" selection-end-column="69" />
             <folding />
           </first_editor>
           <second_editor />
