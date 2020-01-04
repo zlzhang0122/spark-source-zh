@@ -2,11 +2,11 @@
 
 事件总线LiveListenerBus是Spark中非常重要的支撑组件，前面已经提到它采用了监听器的设计模式，其大致流程如下图：
 
-![LiveListenerBus事件总线](../image/LiveListenerBus.png "LiveListenerBus事件总线")
+![LiveListenerBus事件总线](../image/livelistenerbus.png "LiveListenerBus事件总线")
 
 ListenerBus特征是Spark内所有事件总线实现的基类，下图列出了它的一部分继承体系：
 
-![ListenerBus事件总线](../image/ListenerBus.png "ListenerBus继承体系")
+![ListenerBus事件总线](../image/listenerbus.png "ListenerBus继承体系")
 
 StreamingListenerBus和StreamingQueryListenerBus分别是Spark Streaming和Spark SQL的组件，这里主要看ListenerBus和SparkListenerBus这两个trait。
 ListenerBus带有两个泛型参数L和E，其中L表示监听器类型，它可以是任意类型的引用，E表示的是事件类型。而其属性listenerPlusTimers则维护了所有注册在事件总线
@@ -71,4 +71,4 @@ queuedEvents这两个：
   会直接调用postToQueues()方法，将事件发送给所有的队列，而由AsyncEventQueue实际完成投递到监听器的工作。
 
 最后，用一张简图来表示AsyncEventQueue与LiveListenerBus的关系，并结束LiveListenerBus的源码研究。
-![AsyncEventQueue与LiveListenerBus](../image/AsyncEventQueue.png "AsyncEventQueue与LiveListenerBus关系简图")
+![AsyncEventQueue与LiveListenerBus](../image/asynceventqueue.png "AsyncEventQueue与LiveListenerBus关系简图")
