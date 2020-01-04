@@ -6,15 +6,17 @@
 
 * [Spark源码阅读3：SparkContext其它相关](../master/docs/sparkcontext-other.md)
 
-* [Spark源码阅读4：应用程序提交](../master/docs/submit.md)
+* [Spark源码阅读4：LiveListenerBus](../master/docs/livelistenerbus.md)
 
-* [Spark源码阅读5：Spark任务提交](../master/docs/jobsubmit.md)
+* [Spark源码阅读5：应用程序提交](../master/docs/submit.md)
 
-* [Spark源码阅读6：Stage的划分](../master/docs/stage.md)
+* [Spark源码阅读6：Spark任务提交](../master/docs/jobsubmit.md)
 
-* [Spark源码阅读7：Stage的提交](../master/docs/stagesubmit.md)
+* [Spark源码阅读7：Stage的划分](../master/docs/stage.md)
 
-* [Spark源码阅读8：Task调度](../master/docs/taskschedule.md)
+* [Spark源码阅读8：Stage的提交](../master/docs/stagesubmit.md)
+
+* [Spark源码阅读9：Task调度](../master/docs/taskschedule.md)
 
 
 ### 扩展阅读
