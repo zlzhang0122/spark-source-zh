@@ -21,3 +21,6 @@ RPC环境承担着Spark体系内几乎所有的内部及外部通信，RpcEnv抽
 
 其继承体系如下图所示：
 ![RpcEndpoint继承体系](../image/rpcendpoint.png "RpcEndpoint继承体系")
+
+上图中可以看到先前出现过的RPC端点，如HeartbeatReceiver、MapOutputTrackerMasterEndpoint、BlockManagerMasterEndpoint等。此外，上图中的
+ThreadSafeRpcEndpoint时直接继承自RpcEndpoint的trait，即它要求RPC端点对消息的处理时线程安全的也就是满足happens-before原则。
