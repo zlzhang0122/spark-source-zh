@@ -16,3 +16,12 @@
 判断如果是PoisonPill(一种特殊的端点信息，标志着循环的结束)，则在线程结束前会将其重新放回队列中，以结束其它活着的线程；如果不是PoisonPill，则调用
 Inbox.process()方法，对该RPC端点收件箱中的消息进行处理。由于take会阻塞的获取消息，所以如果receivers队列为空会阻塞直到有新的EndpointData进入。
 
+Inbox的enableConcurrent属性用于控制是否允许多个线程同时处理Inbox中的消息，如果不允许，且当前活跃线程数不为0，则直接返回。否则，从messages这个链表
+中获取消息，同时增加活跃线程数，然后对消息进行模式匹配，根据消息类型的不同调用RpcEndpoint中的对应方法进行处理，如果没有匹配，则通过safelyCall()方法
+最终调用RpcEndpoint.onError()进行处理。
+
+需要注意的是，在Inbox.process()方法中(以及Inbox的许多其它方法中)，出现了许多synchronized代码块，这是因为messages是一个普通的链表，线程不安全，所以
+对其的操作都需要加锁以避免安全问题。
+
+那么，Inbox中的消息是通过process()方法进行处理，那么消息是从哪里来的呢？我们可以在Inbox的主构造方法中发现，构建Inbox时会自动投递OnStart消息，让
+Endpoint做一些准备工作，而Inbox是在new EndpointData时构建的。
