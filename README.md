@@ -10,17 +10,21 @@
 
 * [Spark源码阅读4：LiveListenerBus](../master/docs/livelistenerbus.md)
 
-* [Spark源码阅读5：RpcEnv](../master/docs/rpcenv.md)
+* [Spark源码阅读5：SparkEnv初始化](../master/docs/sparkenv.md)
 
-* [Spark源码阅读6：应用程序提交](../master/docs/submit.md)
+* [Spark源码阅读6：RpcEnv](../master/docs/rpcenv.md)
 
-* [Spark源码阅读7：Spark任务提交](../master/docs/jobsubmit.md)
+* [Spark源码阅读7：Dispatcher](../master/docs/dispatcher.md)
 
-* [Spark源码阅读8：Stage的划分](../master/docs/stage.md)
+* [Spark源码阅读8：应用程序提交](../master/docs/submit.md)
 
-* [Spark源码阅读9：Stage的提交](../master/docs/stagesubmit.md)
+* [Spark源码阅读9：Spark任务提交](../master/docs/jobsubmit.md)
 
-* [Spark源码阅读10：Task调度](../master/docs/taskschedule.md)
+* [Spark源码阅读10：Stage的划分](../master/docs/stage.md)
+
+* [Spark源码阅读11：Stage的提交](../master/docs/stagesubmit.md)
+
+* [Spark源码阅读12：Task调度](../master/docs/taskschedule.md)
 
 
 ### 扩展阅读
