@@ -6,7 +6,8 @@ Spark 中所有的 transformations 都是 lazy（懒加载的），因此它不�
 
 默认情况下，每次你在 RDD 运行一个 action 时，每个 transformed RDD 都会被重新计算。但是，您也可用 persist（或 cache）方法将 RDD
 persist（持久化）到内存中；在这种情况下，Spark 为了下次查询时可以更快地访问，会把数据保存在集群上。此外，还支持持续持久化 RDDs 到磁盘，
-或复制到多个结点。
+或复制到多个结点。cache和persist都是控制算子，它们的区别是cache是persist的特例，cache是只能将RDD持久化到内存，而persist则可以传递StorageLevel，
+选择将RDD持久化的介质，此外还有另外一种控制算子叫做checkpoint，它也能将RDD持久化，它与前两者的区别是不仅能将RDD持久化，还能切断RDD之间的依赖关系。
 
 在计算期间，一个任务在一个分区上执行，为了所有数据都在单个 reduceByKey 的 reduce 任务上运行，我们需要执行一个 all-to-all 操作。它必须
 从所有分区读取所有的 key 和 key对应的所有的值，并且跨分区聚集去计算每个 key 的结果 - 这个过程就叫做 shuffle。
