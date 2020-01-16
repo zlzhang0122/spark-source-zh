@@ -34,7 +34,7 @@ RpcEndpointRef是一个抽象类，其中有三个属性需要注意，这三个
   * defaultAskTimeout：RPC端点进行ask()操作的默认超时时间，对应配置spark.rpc.askTimeout(优先级更高)和spark.network.timeout，默认值是120秒。
 
 此外，还有两个属性address和name，分别表示RPC端点引用对应的地址和名称。然后，我们来看一下其中的方法：
-  * send()：发送一条单向的异步消息，，使用"发送即忘"语义，无需回复。
+  * send()：发送一条单向的异步消息，使用"发送即忘"语义，无需回复。
 
   * askAbortable：异步发送一条消息，并在指定的超时时间内等待RPC端点的回复，RPC端点会调用receiveAndReply()方法来处理，并返回一个
   AbortableRpcFuture，AbortableRpcFuture是对Future的包装并添加了一个abort方法，这个方法在RpcEndpointRef中没有实现。
