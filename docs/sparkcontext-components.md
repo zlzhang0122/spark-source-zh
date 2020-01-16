@@ -27,7 +27,7 @@ SparkContext初始化了很多的组件，并且使用其预先定义的私有�
 ![Spark架构图](../image/spark-context.png "SparkContext组件图")
 
 下面对这些组件做一些简要的介绍：
-  * SparkConf，这个在[Spark源码阅读1：SparkConf](../master/docs/sparkconf.md)中已经介绍过，它是构造SparkContext时传进来的参数。SparkContext
+  * SparkConf，这个在[Spark源码阅读1：SparkConf](./docs/sparkconf.md)中已经介绍过，它是构造SparkContext时传进来的参数。SparkContext
   会先将传进来的SparkConf克隆一份(此时就理解了为何SparkConf需要继承Cloneable这个trait)，然后在克隆出的副本上进行校验(主要是应用名和Master的校验)，
   并且添加一些其它的必要的参数(Driver的地址、应用ID等)。克隆出来的SparkConf使得用户不可以再更改配置项，保证了Spark配置在运行时的不可变性。
 

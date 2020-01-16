@@ -1,6 +1,6 @@
 ### SparkContext其它相关
 
-在[Spark源码阅读2：SparkContext主要组件](../master/docs/sparkcontext-components.md)中已经熟悉了SparkContext的组件初始化部分，它们也是SparkContext
+在[Spark源码阅读2：SparkContext主要组件](../docs/sparkcontext-components.md)中已经熟悉了SparkContext的组件初始化部分，它们也是SparkContext
 的主体，除此之外，SparkContext中还有一些与其内部机制紧密关联的属性和完成了许多其它的辅助工作(毕竟共有大概3100行代码呢!!!)，对于它们也有必要做一个大致的了解。
 
 辅助属性：
