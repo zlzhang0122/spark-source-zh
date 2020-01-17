@@ -28,4 +28,16 @@ SerializerManager中的成员属性有以下这些：
   * compressionCodec：使用的压缩编解码器，它是CompressionCodec特征的实现类，并且它会延迟初始化。
 
 SerializerManager获取序列化器时，会先调用canUseKryo()方法来判断需要序列化的对象是否是Scala中的八种基本类型或String类型，如果是则获取KryoSerializer，
-否则使用默认的JavaSerializer。
+否则使用默认的JavaSerializer。获取序列化器的getSerializer()的方法有两种重载，其中带有keyClassTag和valueClassTag两个入参的重载方法专门用于确定Pair RDD
+在Shuffle过程中的序列化器。
+
+SerializerManager提供了多种方法来对输入流和输出流进行包装，将它们转化为压缩或加密的流。在转化为加密的流时，如果encryptionKey存在的话，通过调用wrapForEncryption()
+方法可以将流转化为加密的流。如果存储块ID对应的数据类型支持压缩，可以调用wrapForCompression()方法可以将流采用指定的编解码器进行压缩。
+
+SerializerManager对序列化器Serializer的serializeStream()及deserializeStream()方法进行了一定的封装，其序列化方法既可以直接序列化为流，或根据值的ClassTag序列化
+为ChunkedByteBuffer，即分块的字节缓存。而其反序列化方法则直接返回值类型的迭代器，并且当存储块ID的类型是StreamBlockId(Spark Streaming中用到的块ID)时，将不会自动
+判断应该使用哪种序列化器，而是完全使用用户指定的类型。
+
+现阶段，SerializerManager压缩的实现主要是依靠CompressionCodec，而这个特征只定义了两个方法(也就是compressedOutputStream和compressedInputStream)，所有的逻辑
+都实现在它的伴生对象中。从伴生对象中，我们可以看到，目前Spark支持四种压缩方式，分别是：lz4、lzf、snappy、zstd，可以通过配置项spark.io.compression.codec指定，其中
+lz4是默认的压缩方式，由常量DEFAULT_COMPRESSION_CODEC指定，而createCodec()方法会获得Codec短名称对应的具体类名，然后通过反射的方式创建对应的实例。
