@@ -1,0 +1,4 @@
+### MetricsSystem
+
+MetricsSystem负责收集、存储和输出度量指标，对于一个数据处理引擎而言，系统监控与功能的实现一样重要。比如Storm、Flink都有相应的metric系统来进行
+系统和任务运行指标的收集、存储和上报，Spark也同样不例外，而了解Spark MetricsSystem的相关细节对于研究Spark同样也很有意义。
