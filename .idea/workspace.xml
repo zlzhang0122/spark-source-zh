@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="72d48bf4-1035-4281-9c36-fe255145a3b7" name="Default" comment="" />
+    <list default="true" id="72d48bf4-1035-4281-9c36-fe255145a3b7" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/metricssystem.md" afterPath="$PROJECT_DIR$/docs/metricssystem.md" />
+    </list>
     <ignored path="spark-source-zh.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -61,8 +63,8 @@
           </provider>
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="30">
-                <caret line="2" column="55" selection-start-line="2" selection-start-column="55" selection-end-line="2" selection-end-column="55" />
+              <first_editor relative-caret-position="405">
+                <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -308,7 +310,7 @@
     <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../git/personalized-push-back" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../kraps-rpc/pom.xml" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js-jscs-nodeInterpreter" value="$USER_HOME$/.nvm/versions/node/v4.9.1/bin/node" />
   </component>
@@ -831,12 +833,12 @@
       <workItem from="1579006116610" duration="5497000" />
       <workItem from="1579162776716" duration="9302000" />
       <workItem from="1579183115174" duration="6688000" />
-      <workItem from="1579342957915" duration="736000" />
+      <workItem from="1579342957915" duration="3928000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="174114000" />
+    <option name="totallyTimeSpent" value="177306000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="709" extended-state="1" />
@@ -1560,8 +1562,8 @@
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="30">
-            <caret line="2" column="55" selection-start-line="2" selection-start-column="55" selection-end-line="2" selection-end-column="55" />
+          <first_editor relative-caret-position="405">
+            <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
             <folding />
           </first_editor>
           <second_editor />
