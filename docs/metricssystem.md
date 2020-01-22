@@ -25,4 +25,6 @@ MetricsSystem中的属性成员有：
   * metricsServlet：可以看作是一个特殊的sink，提供给Web UI使用
 
 MetricsSystem提供了registerSource()方法来注册单个度量来源，这个方法首先将度量来源加入到sources缓存数组中，然后调用buildRegistryName()方法来构
-造Source的注册名称。
+造Source的注册名称，其注册名称取决于Metrics的默认命名空间和Executor ID，而命名空间又由spark.metrics.namespace参数控制，默认值是Application ID。
+默认的注册名称是MetricRegistry.name()方法来生成。
+
