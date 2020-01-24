@@ -20,6 +20,22 @@ createStaticHandler()方法创建静态资源的ServletContextHandler，又调�
 (ServletContextHandler是Jetty中一个功能完善的处理器，负责接收并处理HTTP请求，再投递给Servlet。)最后，对每一个handler都调用attachHandler()
 方法注册到WebUI。
 
+WebUI是Spark中所有可以在浏览器中展示的内容的顶级组件，SparkUI类也继承于它。其中有6个属性成员：
+  * tabs：持有Web UI Tab的缓存;
+
+  * handlers：持有Jetty ServletContextHandler的缓存;
+
+  * pageToHandlers：保存WebUI Page(Web UI Tab的下一级组件)及其对应的ServletContextHandler的对应关系;
+
+  * serverInfo：Web UI对应的Jetty服务器的信息;
+
+  * publicHostName：Web UI对应的Jetty服务器名。先通过系统环境变量SPARK_PUBLIC_DNS获取，如果为空再通过spark.driver.host配置项获取;
+
+  * className：经过Utils.getFormattedClassName()方法格式化后的当前类名。
+
+Getter方法有4个，getTabs()和getHandlers()方法就是简单地获取对应属性的值，getBasePath()获取构造参数中定义的Web UI基路径，getSecurityManager()
+则取得构造参数中传入的安全管理器。
+
 
 
 
