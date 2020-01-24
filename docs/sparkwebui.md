@@ -36,6 +36,19 @@ WebUI是Spark中所有可以在浏览器中展示的内容的顶级组件，Spar
 Getter方法有4个，getTabs()和getHandlers()方法就是简单地获取对应属性的值，getBasePath()获取构造参数中定义的Web UI基路径，getSecurityManager()
 则取得构造参数中传入的安全管理器。
 
+Web UI提供了一些attach/detach方法，这些方法都是成对出现，一共3对：attachTab()/detachTab()用于注册和移除Web UI Tab；attachPage()/detachPage()
+用于注册和移除Web UI Page；attachHandler()/detachHandler()用于注册和移除ServletContextHandler。我们来着重分析下attachPage()方法，它的流程是
+调用Jetty工具类JettyUtils的createServletHandler()方法，为Web UI Page的渲染方法render()和renderJson()方法创建ServletContextHandler，也就是
+一个Web UI Page需要对应两个处理器。然后，调用上述attachHandler()方法向Jetty注册处理器，并将映射关系写入到handlers结构。
 
+Spark Web UI实际上是三层的树形结构，根节点为Web UI，中层节点为Web UI Tab，叶子节点为Web UI Page，UI界面的展示主要靠Web UI Tab与Web UI Page来
+实现。在Spark UI界面中，一个Tab可以包含一个或多个Page，并且Tab可选。由于一个Tab可以包含多个Page，因此pages数组用于缓存Tab下所有的Page，attachPage()
+方法用于将Tab的路径前缀与Page的路径前缀拼合起来，并加入到pages数组中。Web UI Tab与Web UI Page各有很多实现，分别对应一个Tab或一个Page。
 
+Spark UI Tab是对Web UI Tab的简单封装，加上Application名称和Spark版本的属性。Environment Tab类只有构造方法，它会调用上面预先定义好的attachPage()方法，
+将Environment Page加入。Environment Page的render()方法用来渲染页面内容，流程如下：
+  * 从AppStatusStore中获取所有环境信息;
 
+  * 调用UIUtils.listingTable()方法，将对应的表头与添加了HTML标签的行封装成表格;
+
+  * 将表格排列好，调用UIUtils.headerSparkPage()方法，按定义好的页面布局展示在浏览器上。
