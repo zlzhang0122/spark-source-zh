@@ -57,9 +57,12 @@ master.sink.servlet.path=/metrics/master/json。拆分的结果就是原key的in
 经过上面的一番分析，已经可以明确，Spark的Metrics系统是由Instance、Source、Metrics、Sink四个部分组成，它们之间的关系如下图：
 // todo (假装我是图，真的以后补)
 
-Source是一个非常简单的trait，其中定义了两个方法，sourceName获取度量来源的名称，metricRegistry获取其对应的注册中心。它有多种具体的实现，其中executor的
-度量来源实现ExecutorSource是其中比较常见和重要的，我们以它为重点来简单描述Source的具体实现：ExecutorSource向注册中心注册了很多指标，包括与threadpool
-相关的Guage、与filesystem相关的Guage，Guage是Metrics体系内估计metrics值的工具。还有着大量的计数器用于统计GC、shuffle、serializable等方面的计数值。
+Source是一个非常简单的trait，其中定义了两个方法，sourceName获取度量来源的名称，metricRegistry获取其对应的注册中心。它有多种具体的实现。如下图所示：
+// todo(假装我是图，真的以后补)
+
+其中executor的度量来源实现ExecutorSource是其中比较常见和重要的，我们以它为重点来简单描述Source的具体实现：ExecutorSource向注册中心注册了很多指标，包
+括与threadpool相关的Guage、与filesystem相关的Guage，Guage是Metrics体系内估计metrics值的工具。还有着大量的计数器用于统计GC、shuffle、serializable
+等方面的计数值。
 
 Sink也是一个比较简单的trait，其中定义了3个方法：start()/stop()方法分别用于启动和停止Sink，report()方法用于输出具体的metrics的值，其有七个具体的实现。
 具体来说，ConsoleSink输出到控制台，CsvSink输出到CSV文件。Slf4jSink对Codahale Metrics中的Slf4jReporter类进行简单封装，然后Slf4jReporter启动之后，

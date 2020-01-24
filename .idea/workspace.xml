@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="72d48bf4-1035-4281-9c36-fe255145a3b7" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/metricssystem.md" afterPath="$PROJECT_DIR$/docs/metricssystem.md" />
-    </list>
+    <list default="true" id="72d48bf4-1035-4281-9c36-fe255145a3b7" name="Default" comment="" />
     <ignored path="spark-source-zh.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -64,8 +61,8 @@
           </provider>
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="25">
-                <caret line="61" column="54" selection-start-line="61" selection-start-column="54" selection-end-line="61" selection-end-column="54" />
+              <first_editor relative-caret-position="100">
+                <caret line="67" column="20" selection-start-line="67" selection-start-column="20" selection-end-line="67" selection-end-column="20" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -225,7 +222,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="396" />
+    <option name="x" value="10" />
+    <option name="y" value="161" />
     <option name="width" value="1280" />
     <option name="height" value="483" />
   </component>
@@ -834,15 +832,15 @@
       <workItem from="1579006116610" duration="5497000" />
       <workItem from="1579162776716" duration="9302000" />
       <workItem from="1579183115174" duration="6688000" />
-      <workItem from="1579342957915" duration="12267000" />
+      <workItem from="1579342957915" duration="12312000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="185645000" />
+    <option name="totallyTimeSpent" value="185690000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="396" width="1280" height="483" extended-state="0" />
+    <frame x="10" y="161" width="1280" height="483" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1563,8 +1561,8 @@
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="25">
-            <caret line="61" column="54" selection-start-line="61" selection-start-column="54" selection-end-line="61" selection-end-column="54" />
+          <first_editor relative-caret-position="100">
+            <caret line="67" column="20" selection-start-line="67" selection-start-column="20" selection-end-line="67" selection-end-column="20" />
             <folding />
           </first_editor>
           <second_editor />
