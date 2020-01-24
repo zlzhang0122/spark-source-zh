@@ -54,4 +54,15 @@ metrics.properties文件中读取。
 master.sink.servlet.path=/metrics/master/json。拆分的结果就是原key的instance部分作为HashMap的key，原key的剩余部分作为Properties的key，原value部分
 作为Properties的value，最终结果就是按照instance名称对度量配置进行分组。
 
+经过上面的一番分析，已经可以明确，Spark的Metrics系统是由Instance、Source、Metrics、Sink四个部分组成，它们之间的关系如下图：
+// todo (假装我是图，真的以后补)
 
+Source是一个非常简单的trait，其中定义了两个方法，sourceName获取度量来源的名称，metricRegistry获取其对应的注册中心。它有多种具体的实现，其中executor的
+度量来源实现ExecutorSource是其中比较常见和重要的，我们以它为重点来简单描述Source的具体实现：ExecutorSource向注册中心注册了很多指标，包括与threadpool
+相关的Guage、与filesystem相关的Guage，Guage是Metrics体系内估计metrics值的工具。还有着大量的计数器用于统计GC、shuffle、serializable等方面的计数值。
+
+Sink也是一个比较简单的trait，其中定义了3个方法：start()/stop()方法分别用于启动和停止Sink，report()方法用于输出具体的metrics的值，其有七个具体的实现。
+具体来说，ConsoleSink输出到控制台，CsvSink输出到CSV文件。Slf4jSink对Codahale Metrics中的Slf4jReporter类进行简单封装，然后Slf4jReporter启动之后，
+就会按照pollPeriod和pollUnit指定的时间周期性的轮询METRics值并输出到符合SLF4J规范的日志等。此外，JmxSink可以通过将metrics数据输出到JMX中，从而通过
+JVM可视化工具(如VisualVM)进行查看。而MetricsServlet在上面提到过，可以利用Spark UI内置的Jetty服务输出metrics数据到浏览器。
+// todo(假装我是图，真的以后补)
