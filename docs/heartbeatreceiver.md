@@ -1,0 +1,7 @@
+### HeartbeatReceiver
+
+在Spark中，Executor需要定期向Driver发送心跳以表明自己仍然存活，而HeartbeatReceiver是由Driver持有并负责处理各个Executor的心跳，监控它们的运行状态。
+
+在代码实现上，HeartbeatReceiver类继承了SparkListener抽象类，并实现了ThreadSafeRpcEndpoint特征，这表明其既是一个监听器，也是一个线程安全的RPC端点。
+HeartbeatReceiver类有两个构造方法参数，分别是SparkContext和Clock特征的实现类SystemClock类，SystemClock提供了对系统时间System.currentTimeMillis()
+的简单封装。
