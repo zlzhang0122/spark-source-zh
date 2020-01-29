@@ -74,14 +74,6 @@ persist（持久化）到内存中；在这种情况下，Spark 为了下次查�
 在计算期间，一个任务在一个分区上执行，为了所有数据都在单个 reduceByKey 的 reduce 任务上运行，我们需要执行一个 all-to-all 操作。它必须
 从所有分区读取所有的 key 和 key对应的所有的值，并且跨分区聚集去计算每个 key 的结果 - 这个过程就叫做 shuffle。
 
-RDD的依赖关系可以分为两种：
-(1) 窄依赖：父RDD的每个分区最多被其子RDD的一个分区所依赖，也就是说子RDD的每个分区依赖于常数个父分区，子RDD每个分区的生成与父RDD的数据规模
-无关.
-
-(2) 宽依赖：父RDD的每个分区被其子RDD的多个分区所依赖，子RDD的每个分区的生产与父RDD的数据规模相关.
-
-区分宽依赖与窄依赖的原因是：窄依赖关系的RDD在集群的节点的内存中可以以流水线(pipeline)的方式高效运行.
-
 创建RDD:
 (1) 对驱动程序中的集合进行并行化的处理，包括：makeRDD、parallelize，区别是makeRDD可以指定每一个分区preferredLocations参数
 (2) 读取外部存储系统(HDFS、Hbase、Hive等)，包括：文本文件、SequenceFile、Avro、Parquet等，其中textFile支持.gz格式的压缩文件读取,需要注意的是，
