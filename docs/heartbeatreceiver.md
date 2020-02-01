@@ -46,6 +46,3 @@ HeartbeatReceiver类有两个构造方法参数，分别是SparkContext和Clock�
   * expireDeadHosts()：遍历executorLastSeen映射，取出最后一次心跳的时间戳与当前时间进行对比，如果差值大于spark.network.timeout表示Executor已超时，那么就需要：调用
   TaskScheduler.executorLost()方法，从调度体系中移除超时的Executor；向killExecutorThread线程池提交执行SparkContext.killAndReplaceExecutor()方法的任务，异步地
   杀掉超时的Executor；从executorLastSeen映射中删除超时的Executor ID的条目。
-
-最后，用一张图来描述下HeartbeatReceiver的工作流程吧！
-//todo, 假设我是图，真的以后补
