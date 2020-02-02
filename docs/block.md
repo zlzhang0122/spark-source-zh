@@ -41,7 +41,4 @@ Block数据存储在BlockData中，但是它仅仅是数据，如果我们想要
   * writerTask：当前持有该块写锁的Task ID，如果写锁被非Task的代码持有则为BlockInfo.NON_TASK_WRITER，如果写锁没有被持有则过BlockInfo.NO_WRITER(需要注意的是，锁并非
   BlockInfo提供的，而是由BlockInfoManager提供)。
 
-
-
-
-
+BlockId、BlockData、BlockInfo三者结合，就能完整的描述一个Block了。
