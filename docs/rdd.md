@@ -52,7 +52,7 @@ RDD类中对Partition、Dependency和Preferred Location都提供了简单的Gett
 
 
 RDD拥有很多的子类，这些子类都实现了上面提到的4个抽象方法，绝大多数对RDD的操作(算子)都会返回RDD子类的实例，主要的RDD子类如下图所示：
-//todo,假装我是图，真的以后补
+![RDD类图](../image/rdd.png "RDD类图")
 
 我们知道，Spark中RDD的算子有两类，一种是转换算子(Transformation)，另一种是行动算子(Action)，下面分别来看一下：
   * 转换算子：用于对一个RDD执行一系列的逻辑，使其变成另一个RDD(实际上是new出了一个新的类型的RDD，将原RDD类型包装了进去)。我们来看一个工作中比较常见且效率
@@ -79,6 +79,3 @@ persist（持久化）到内存中；在这种情况下，Spark 为了下次查�
 (2) 读取外部存储系统(HDFS、Hbase、Hive等)，包括：文本文件、SequenceFile、Avro、Parquet等，其中textFile支持.gz格式的压缩文件读取,需要注意的是，
 读取文件时，传递的分区参数为最小分区数，但是实际上不一定是这个分区数，实际的数字取决于hadoop读取文件时的分片规则。
 (3) 基于已有RDD的转换
-
-RDD的执行操作：first、count、collect、take
-

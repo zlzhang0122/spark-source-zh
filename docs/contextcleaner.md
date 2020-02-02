@@ -1,6 +1,6 @@
 ### ContextCleaner
 
-ContextCleaner上下文清理器扮演着Spark Core中垃圾收集器的角色，emmmmm......可以类比Java GC。它是在SparkContext中进行初始化的，代码非常简单，只依赖于
+ContextCleaner上下文清理器扮演着Spark Core中垃圾收集器的角色，emmmmm......可以类比于Java GC。它是在SparkContext中进行初始化的，代码非常简单，只依赖于
 SparkContext本身，由spark.cleaner.referenceTracking配置项控制是否启用，默认值是启用状态。
 
 下面分析一下ContextCleaner类的主要成员变量：
