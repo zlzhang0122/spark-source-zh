@@ -1,5 +1,6 @@
 ### RDDDependency
 
+过年时节来分析RDD的依赖，还挺合适宜的^-^！
 在Spark Core中，RDD依赖关系的基类是Dependency抽象类，该类中只定义了一个方法rdd()，用于取得当前RDD依赖的父RDD，其继承体系如下图所示：
 ![Dependency继承体系](../image/dependency.png "Dependency继承体系")
 
