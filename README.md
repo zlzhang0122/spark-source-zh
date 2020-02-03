@@ -36,25 +36,23 @@
 
 * [Spark源码阅读17：Dependency](../master/docs/dependency.md)
 
-* [Spark源码阅读18：SerializerManager](../master/docs/serializermanager.md)
+* [Spark源码阅读18：Checkpoint](../master/docs/checkpoint.md)
 
-* [Spark源码阅读19：SerializerManager](../master/docs/serializermanager.md)
+* [Spark源码阅读19：Block](../master/docs/block.md)
 
-* [Spark源码阅读20：SerializerManager](../master/docs/serializermanager.md)
+* [Spark源码阅读20：BlockInfoManager](../master/docs/blockinfomanager.md)
 
-* [Spark源码阅读11：应用程序提交](../master/docs/submit.md)
+* [Spark源码阅读21：应用程序提交](../master/docs/submit.md)
 
-* [Spark源码阅读12：Spark任务提交](../master/docs/jobsubmit.md)
+* [Spark源码阅读22：Spark任务提交](../master/docs/jobsubmit.md)
 
-* [Spark源码阅读13：Stage的划分](../master/docs/stage.md)
+* [Spark源码阅读23：Stage的划分](../master/docs/stage.md)
 
-* [Spark源码阅读14：Stage的提交](../master/docs/stagesubmit.md)
+* [Spark源码阅读24：Stage的提交](../master/docs/stagesubmit.md)
 
-* [Spark源码阅读15：Task调度](../master/docs/taskschedule.md)
+* [Spark源码阅读25：Task调度](../master/docs/taskschedule.md)
 
 
 ### 扩展阅读
-
-* [Spark扩展阅读：RDD操作](../master/docs/rdd.md)
 
 * [Spark扩展阅读：Scala语法](../master/docs/scala.md)
