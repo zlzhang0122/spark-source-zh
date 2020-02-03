@@ -1,6 +1,6 @@
 ### RDDDependency
 
-过年时节来分析RDD的依赖，还挺合适宜的^-^！
+过年时节来分析RDD的依赖，还挺合时宜的，毕竟我们虽然已经长大成人，成为常年在外的游子，但是家是我们累了之后栖息的港湾，这里也有我们的依赖^-^！
 在Spark Core中，RDD依赖关系的基类是Dependency抽象类，该类中只定义了一个方法rdd()，用于取得当前RDD依赖的父RDD，其继承体系如下图所示：
 ![Dependency继承体系](../image/dependency.png "Dependency继承体系")
 
