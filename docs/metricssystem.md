@@ -70,4 +70,4 @@ Sink也是一个比较简单的trait，其中定义了3个方法：start()/stop(
 就会按照pollPeriod和pollUnit指定的时间周期性的轮询METRics值并输出到符合SLF4J规范的日志等。此外，JmxSink可以通过将metrics数据输出到JMX中，从而通过
 JVM可视化工具(如VisualVM)进行查看。而MetricsServlet在上面提到过，可以利用Spark UI内置的Jetty服务输出metrics数据到浏览器。
 Sink特征的继承体系如下图所示：
-![Sink继承体系](../assets/img/spark/source.png "Sink继承体系")
+![Sink继承体系](../image/source.png "Sink继承体系")
