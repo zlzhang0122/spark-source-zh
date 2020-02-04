@@ -3,7 +3,7 @@
 在[Spark源码阅读19：Block](./block.md)中对块的元数据信息BlockInfo进行分析时涉及到了锁的相关信息，包括读取块数据的加锁次数和写入数据时的写锁，
 但是我们在看BlockData的实现类ByteBufferBlockData时，其底层的实际实现ChunkedByteBuffer类中并没有锁的代码，这说明锁的具体实现和管理另有别的类来完成，
 这个类就是BlockInfoManager，字面理解是"块信息管理器"，其实主要是对块的锁进行管理。这也很好理解，锁的信息出现在BlockInfo，而且实际上锁属于块的元数据
-信息，由BlockInfo委托给BlockInfoManager管理也很=属正常操作。
+信息，由BlockInfo委托给BlockInfoManager管理也属正常操作。
 
 BlockInfoManager类与BlockInfo类在一个文件内，直接来看一下BlockInfoManage的里面的成员属性吧：
   * TaskAttemptId：Long类型的重新命名，表示Task的尝试ID;
