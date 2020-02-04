@@ -21,7 +21,7 @@ ExecutionMemoryPool用于执行(包括Spark的连接、聚合、排序等和Shuf
 先来看下StorageMemoryPool类，其构造方法参数除了对象类型的锁lock之外，还有一个是表示这个内存池跟踪的内存模式MemoryMode。MemoryMode是一个枚举类，有两个取值：
 ON_HEAP和OFF_HEAP，分别表示堆内存和非堆内存。所谓堆内存就是每个Executor的JVM所使用的那部分内存，而非堆内存是Worker节点上的本机内存，需要通过Unsafe API来分
 配，其关系如下图所示：
-![堆内存与非堆内存的关系](../image/meomory.png "堆内存与非堆内存的关系")
+![堆内存与非堆内存的关系](../image/memory.png "堆内存与非堆内存的关系")
 
 StorageMemoryPool使用_memoryUsed来记录已使用多少内存，并覆盖了memoryUsed()方法来返回它，此外它还有一个变量_memoryStore来真正的负责块在内存中的存取。下面
 来看一看StorageMemoryPool提供的方法：
