@@ -11,7 +11,7 @@ MemoryManager类是在SparkEnv.create()方法中初始化的，在其中会首�
 
 MaxExecutionMemory的计算规则是，spark.testing.memory配置项的值(如无，则是Java虚拟机所能使用的内存最大值，但由于spark.testing.memory配置项基本
 不配置，所以一般都是这个值) * spark.shuffle.memoryFraction配置项的值(默认是0.2) * spark.shuffle.safetyFraction配置项的值(默认是0.9)，得到的
-值取Long型结果也就是取整。值得注意的是：在上面的计算过程中会对Driver和Executor的内存大小进行校验，它们必须大于32M，否则会抛出IllegalArgumentException
+值取Long型结果也就是取整。值得注意的是：在上面的计算过程中会对Driver或Executor的内存大小进行校验，它们必须大于32M，否则会抛出IllegalArgumentException
 异常。
 
 MaxStorageMemory的计算规则是，其值是spark.testing.memory配置项的值(如无则是Java虚拟机所能使用的内存最大值，但由于spark.testing.memory配置项
@@ -34,3 +34,6 @@ StaticMemoryManager类实现了MemoryManager中定义的三个用于申请内存
 从代码上分析了这么多，文字上描述太过抽象，把我自己都给整迷糊了，来张图总结下，可能会比较清晰：
 ![StaticMemoryManager](../image/staticmemorymanager.png "StaticMemoryManager")
 
+从上面的分析可知，StaticMemoryManager之所以称做静态内存管理器，就是因为其内存区域的大小都是事先经过各种比例参数确定好的，这样虽然实现简单，但是对于比较
+复杂场景想要设置得非常完美是非常困难的，对于设置这些参数的人的要求也非常高，极其容易出现设置不当导致有的内存不足而另一部分却过剩的情况，UnifiedMemoryManager
+就是为了解决上述问题而出现的。UnifiedMemoryManager类将在接下来进行分析，今天实在是太累了，而且不能出去真是闷得太发慌了！！！

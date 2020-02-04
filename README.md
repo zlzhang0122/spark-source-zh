@@ -46,6 +46,8 @@
 
 * [Spark源码阅读22：StaticMemoryManager](../master/docs/staticmemorymanager.md)
 
+* [Spark源码阅读23：UnifiedMemoryManager](../master/docs/unifiedmemorymanager.md)
+
 ### 扩展阅读
 
 * [Spark扩展阅读1：Scala语法](../master/docs/scala.md)
