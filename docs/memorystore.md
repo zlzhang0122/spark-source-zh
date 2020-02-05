@@ -15,7 +15,7 @@ MemoryEntry可以理解为块在内存中的表示，其中的属性size表示�
 再来看一下BlockEvictionHandler，它也是个trait，注释中讲到它从内存中淘汰掉一个块，如果可能的话会将淘汰掉的块放入到磁盘，当内存到达了其上限且需要释放
 空间时被调用，且调用它时需要持有块的写锁。
 
-在介绍完了MemoryEntry和BlockEvictionHandler后，现在可以正式开始介绍MemoryStore了。先来看它的属性成员：
+在介绍完了MemoryEntry和BlockEvictionHandler后，现在可以正式开始介绍MemoryStore了。先来看它的成员属性：
   * entries：BlockId与MemoryEntry数组的映射关系，使用LinkedHashMap存储，初始容量32，负载因子0.75，按访问顺序排序;
 
   * onHeapUnrollMemoryMap/offHeapUnrollMemoryMap：分别存储taskAttemptId和该Task在堆内、堆外占用的UnrollMemory大小之间的映射关系;
