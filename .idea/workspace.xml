@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="72d48bf4-1035-4281-9c36-fe255145a3b7" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/image/memoryreclaim.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/image/unifiedmemorymanager.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/unifiedmemorymanager.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/memorystore.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/staticmemorymanager.md" afterPath="$PROJECT_DIR$/docs/staticmemorymanager.md" />
     </list>
     <ignored path="spark-source-zh.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,8 +29,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="690">
-                <caret line="46" column="70" selection-start-line="46" selection-start-column="51" selection-end-line="46" selection-end-column="70" />
+              <first_editor relative-caret-position="236">
+                <caret line="48" column="66" selection-start-line="48" selection-start-column="66" selection-end-line="48" selection-end-column="66" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -52,12 +49,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="unifiedmemorymanager.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/docs/unifiedmemorymanager.md">
+      <file leaf-file-name="block.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docs/block.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="461">
-                <caret line="61" column="42" selection-start-line="61" selection-start-column="42" selection-end-line="61" selection-end-column="42" />
+              <first_editor relative-caret-position="-41">
+                <caret line="17" column="50" selection-start-line="17" selection-start-column="33" selection-end-line="17" selection-end-column="50" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -76,36 +73,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="staticmemorymanager.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docs/staticmemorymanager.md">
+      <file leaf-file-name="memorystore.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/docs/memorystore.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="510">
-                <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="78" />
-                <folding />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-          <provider editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="0">
-                <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                <folding />
-              </first_editor>
-              <second_editor>
-                <js_state />
-              </second_editor>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="memorymanage.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docs/memorymanage.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="FIRST">
-              <first_editor relative-caret-position="705">
-                <caret line="47" column="97" selection-start-line="47" selection-start-column="16" selection-end-line="47" selection-end-column="97" />
+              <first_editor relative-caret-position="288">
+                <caret line="63" column="24" selection-start-line="63" selection-start-column="24" selection-end-line="63" selection-end-column="24" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -173,10 +146,11 @@
         <option value="$PROJECT_DIR$/docs/checkpoint.md" />
         <option value="$PROJECT_DIR$/docs/memorypool.md" />
         <option value="$PROJECT_DIR$/docs/blockinfomanager.md" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/docs/memorymanage.md" />
         <option value="$PROJECT_DIR$/docs/staticmemorymanager.md" />
         <option value="$PROJECT_DIR$/docs/unifiedmemorymanager.md" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/docs/memorystore.md" />
       </list>
     </option>
   </component>
@@ -193,9 +167,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
+    <option name="y" value="311" />
     <option name="width" value="1280" />
-    <option name="height" value="709" />
+    <option name="height" value="508" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -812,15 +786,15 @@
       <workItem from="1580648435475" duration="10668000" />
       <workItem from="1580720447040" duration="8455000" />
       <workItem from="1580781291299" duration="12706000" />
-      <workItem from="1580826115137" duration="3448000" />
+      <workItem from="1580826115137" duration="12736000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="264734000" />
+    <option name="totallyTimeSpent" value="274022000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="709" extended-state="0" />
+    <frame x="0" y="311" width="1280" height="508" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -891,13 +865,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/docs/stagesubmit.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1526,31 +1493,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/block.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="135">
-            <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="50" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-      <provider editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="0">
-            <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          </first_editor>
-          <second_editor>
-            <js_state />
-          </second_editor>
-        </state>
+    <entry file="file://$PROJECT_DIR$/image/staticmemorymanager.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="690">
-            <caret line="46" column="70" selection-start-line="46" selection-start-column="51" selection-end-line="46" selection-end-column="70" />
+          <first_editor relative-caret-position="236">
+            <caret line="48" column="66" selection-start-line="48" selection-start-column="66" selection-end-line="48" selection-end-column="66" />
             <folding />
           </first_editor>
           <second_editor />
@@ -1573,11 +1525,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/blockinfomanager.md">
+    <entry file="file://$PROJECT_DIR$/docs/staticmemorymanager.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="-141">
-            <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="32" />
+          <first_editor relative-caret-position="15">
+            <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+            <folding />
           </first_editor>
           <second_editor />
         </state>
@@ -1586,6 +1539,7 @@
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="0">
             <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <folding />
           </first_editor>
           <second_editor>
             <js_state />
@@ -1593,11 +1547,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/staticmemorymanager.md">
+    <entry file="file://$PROJECT_DIR$/docs/unifiedmemorymanager.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="510">
-            <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="78" />
+          <first_editor relative-caret-position="0">
+            <caret line="0" column="24" selection-start-line="0" selection-start-column="4" selection-end-line="0" selection-end-column="24" />
             <folding />
           </first_editor>
           <second_editor />
@@ -1618,8 +1572,8 @@
     <entry file="file://$PROJECT_DIR$/docs/memorymanage.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="705">
-            <caret line="47" column="97" selection-start-line="47" selection-start-column="16" selection-end-line="47" selection-end-column="97" />
+          <first_editor relative-caret-position="75">
+            <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="10" />
             <folding />
           </first_editor>
           <second_editor />
@@ -1637,16 +1591,55 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/image/staticmemorymanager.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docs/unifiedmemorymanager.md">
+    <entry file="file://$PROJECT_DIR$/docs/blockinfomanager.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="461">
-            <caret line="61" column="42" selection-start-line="61" selection-start-column="42" selection-end-line="61" selection-end-column="42" />
+          <first_editor relative-caret-position="-141">
+            <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="32" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="0">
+            <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor>
+            <js_state />
+          </second_editor>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/block.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="-41">
+            <caret line="17" column="50" selection-start-line="17" selection-start-column="33" selection-end-line="17" selection-end-column="50" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="0">
+            <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor>
+            <js_state />
+          </second_editor>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/memorystore.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="288">
+            <caret line="63" column="24" selection-start-line="63" selection-start-column="24" selection-end-line="63" selection-end-column="24" />
             <folding />
           </first_editor>
           <second_editor />
