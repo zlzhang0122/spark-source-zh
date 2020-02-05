@@ -1,7 +1,7 @@
 ### UnifiedMemoryManager
 
 在[Spark源码阅读22：StaticMemoryManager](./staticmemorymanager.md)中分析了静态内存管理器StaticMemoryManager，也在最后总结了一些它的缺陷，既然存在缺陷
-并且缺陷很明显(最主要的是，都已经把它的缺陷坦白讲了，如果没解决方案肯定不会讲出来对不对^-^)，那么就一定有一个新的内存管理器能够弥补它的这些缺陷，这就是今天要分析
+并且缺陷很明显(最主要的是，都已经把它的缺陷坦白讲了，如果没有好的解决方案肯定不会讲出来对不对^-^)，那么就一定有一个新的内存管理器能够弥补它的这些缺陷，这就是今天要分析
 的统一内存管理器UnifiedMemoryManager，它也是自Spark 1.6开始默认的内存管理器。
 
 UnifiedMemoryManager相比于StaticMemoryManager最主要的改进有两点：
