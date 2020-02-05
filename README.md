@@ -48,6 +48,10 @@
 
 * [Spark源码阅读23：UnifiedMemoryManager](../master/docs/unifiedmemorymanager.md)
 
+* [Spark源码阅读24：MemoryStore](../master/docs/memorystore.md)
+
+* [Spark源码阅读25：DiskBlockManager](../master/docs/diskblockmanager.md)
+
 ### 扩展阅读
 
 * [Spark扩展阅读1：Scala语法](../master/docs/scala.md)
