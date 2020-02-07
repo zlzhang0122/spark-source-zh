@@ -1,5 +1,7 @@
 ### DiskBlockManager
 
+分析完了内存存储相关的源码，再来看看磁盘存储相关的吧！
+
 DiskBlockManager负责创建和维护逻辑块数据及其在磁盘上的存储位置之间的逻辑对应关系，一个块数据被映射为一个拥有名字的文件，名字由BlockId生成。
 其构造函数接受两个参数：SparkConf的实例conf和布尔类型的deleteFilesOnStop，后者表示的是在停止DiskBlockManager时是否需要删除本地的存储目
 录，在初始化DiskBlockManager时会指定该值。再来看看其成员属性：
