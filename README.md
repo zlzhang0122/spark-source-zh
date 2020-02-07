@@ -52,6 +52,8 @@
 
 * [Spark源码阅读25：DiskBlockManager](../master/docs/diskblockmanager.md)
 
+* [Spark源码阅读26：DiskStore](../master/docs/diskstore.md)
+
 ### 扩展阅读
 
 * [Spark扩展阅读1：Scala语法](../master/docs/scala.md)
