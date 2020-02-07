@@ -1,7 +1,7 @@
 ### DiskStore
 
-Spark中负责内存关起的组件是MemoryManager及其子类，真正负责内存分配和释放的组件是MemoryStore，负责磁盘块管理的组件是DiskBlockManager，由此可以
-联想到，真正负责磁盘写入和释放的组件应该也有个类似的名字，没错啦，它就是今天要分析的DiskStore类。
+Spark中负责内存管理的组件是MemoryManager及其子类，真正负责内存分配和释放的组件是MemoryStore，负责磁盘块管理的组件是DiskBlockManager，由此可以
+联想到，真正负责磁盘写入和释放的组件应该也有个类似于XxxStore的名字，没错啦，它就是今天要分析的DiskStore类。
 
 DiskStore类的构造方法有三个参数，分别接受SparkConf、DiskBlockManager、SecurityManager这三个类的实例，前两个类在前面都已经分析过了，最后一个
 SecurityManager从名字就能看出是负责提供安全支持的类，由SparkEnv负责实例化，且绝大多数的组件都要通过SparkEnv来访问SecurityManager。再来看看其
