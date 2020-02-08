@@ -54,6 +54,8 @@
 
 * [Spark源码阅读26：DiskStore](../master/docs/diskstore.md)
 
+* [Spark源码阅读27：BlockManagerMaster](../master/docs/blockmanagermaster.md)
+
 ### 扩展阅读
 
 * [Spark扩展阅读1：Scala语法](../master/docs/scala.md)
