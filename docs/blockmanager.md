@@ -83,3 +83,32 @@ BlockManager实现了BlockDataManager和BlockEvictionHandler特征类，它们�
   配置项设定的阈值时(默认值是5)，就主动刷新一次远端BlockManager的位置，以防过期;
 
   * 如果已经尝试了所有的远端BlockManager依然没有获取到数据，就认为此次读取失败，返回None;
+
+getOrElseUpdate()方法能同时读写数据，上面介绍的都是其中的涉及到的从本地和远程获取数据的方法，但其实其中还调用了doPutIterator()来写入数据，该方法内部本质上是调用的doPut()
+方法，但是其实际的写入逻辑实际上是作为doPut()的柯里化参数putBody传入的，具体的执行逻辑如下：
+  * 首先根据传入的存储级别，如果使用到了内存(即使也使用到了磁盘)。如果存储级别是反序列化的，则调用memoryStore.putIteratorAsValues()方法将块数据作为对象写入到内存中，如果
+  写入成功则记录写入大小；如果写入部分失败，表明没有足够的内存写入，那么如果存储级别同样支持磁盘，就调用diskStore.put()将剩余的数据写入磁盘，写入时需要调用serializerManager.dataSerializeStream()
+  将其序列化写入，如果存储级别不支持磁盘，则记录下未能写入的数据记录；如果存储级别不支持反序列化，那就调用memoryStore.putIteratorAsBytes()写入，写入成功记录写入大小，写入
+  部分失败，表明没有足够的内存写入，那么如果存储级别同样支持磁盘，就调用diskStore.put()将剩余的数据写入磁盘，写入时需要调用partiallySerializedValues.finishWritingToStream()
+  先写入序列化值，然后从原始输入迭代器序列化值，完成写入块数据到指定输出流的操作，如果存储级别不支持磁盘，则记录下未能写入的数据记录;
+
+  * 如果传入的存储级别不支持内存，而支持磁盘，则调用diskStore.put()写入数据，写入的过程中会调用serializerManager.dataSerializeStream()方法写入序列化数据流;
+
+  * 写入完成后调用getCurrentBlockStatus()获取写入的状态，如果已经成功写入，块数据可能在内存中也可能在磁盘中，如果tellMaster为true表示需要通知BlockManagerMaster状态，则
+  调用reportBlockStatus()向master告知新块的状态，调用addUpdatedBlockStatusToTaskMetrics()向度量系统通知块状态的更新;
+
+  * 检查块的副本数配置是否大于1，如果是就通过上面介绍过的doGetLocalBytes()方法获取本地块数据，然后调用replicate()将块向其它节点复制level.replication - 1份(阻塞方法);
+
+  * 最后返回写入失败的块数据，如果没有则为None;
+
+既然doPutIterator()已经分析完成,那么理解doPut()方法也就比较简单了，它是doPutBytes()和doPutIterator()的共用方法，主要是做一些写入前后的准备工作，具体逻辑如下:
+  * 先进性必要的判断，包括blickId不能为null，存储级别不能为null或不可用;
+
+  * 然后为块创建一个新的BlockInfo块信息，并调用blockInfoManager.lockNewBlockForWriting()为块加写锁，如果添加失败表明块已存在，此时如果keepReadLock取值为false
+  表示不继续持有读锁则释放掉对该块的读锁并返回None;
+
+  * 调用putBody函数进行写入，如果返回的迭代器为空表示写入成功，此时如果keepReadLock取值为true则调用blockInfoManager.downgradeLock()对持有的该块的锁降级(原先
+  为写锁，现降级为读锁)，否则直接释放掉持有的锁。如果返回的迭代器不为空表示写入不成功，则调用removeBlockInternal()方法移除写入的块。最后返回putBody返回的迭代器。
+
+最后，用一张图总结下上面的关于块数据读写的介绍吧：
+![BlockBlockManager读写](../image/blockmanager.png "BlockManager读写")
