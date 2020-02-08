@@ -58,16 +58,16 @@
 
 * [Spark源码阅读28：BlockManager](../master/docs/blockmanager.md)
 
+* [Spark源码阅读29：应用程序提交](../master/docs/submit.md)
+
+* [Spark源码阅读30：Spark任务提交](../master/docs/jobsubmit.md)
+
+* [Spark源码阅读31：Stage的划分](../master/docs/stage.md)
+
+* [Spark源码阅读32：Stage的提交](../master/docs/stagesubmit.md)
+
+* [Spark源码阅读33：Task调度](../master/docs/taskschedule.md)
+
 ### 扩展阅读
 
-* [Spark扩展阅读1：Scala语法](../master/docs/scala.md)
-
-* [Spark扩展阅读2：应用程序提交](../master/docs/submit.md)
-
-* [Spark扩展阅读3：Spark任务提交](../master/docs/jobsubmit.md)
-
-* [Spark扩展阅读4：Stage的划分](../master/docs/stage.md)
-
-* [Spark扩展阅读5：Stage的提交](../master/docs/stagesubmit.md)
-
-* [Spark扩展阅读6：Task调度](../master/docs/taskschedule.md)
+* [Spark扩展阅读：Scala语法](../master/docs/scala.md)

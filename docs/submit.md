@@ -1,5 +1,8 @@
 ### Spark应用程序的提交
 
+前面主要分析了Spark Core中SparkContext涉及的主要组件，这些组件是Spark Core的基石。
+从今天开始，主要分析Spark Core三大核型之一的基于RDD的调度系统，那么该如何开始呢？很简单，就从将Spark应用程序提交到集群运行开始。
+
 在将Spark应用程序提交到集群运行时，会使用spark-submit脚本，该脚本比较简单，分析该脚本知道其实最终调用的是spark-class脚本，传入的参数是
 SparkSubmit及其他用户传入的参数。在spark-class中，首先会使用load-spark-env.sh加载spark的环境变量信息、定位spark jars文件等，然后调用
 org.apache.spark.launcher.Main正式启动org.apache.spark.deploy.SparkSubmit的执行。
