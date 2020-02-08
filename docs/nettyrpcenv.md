@@ -1,6 +1,18 @@
 ### NettyRpcEnv
 
 NettyRpcEnv作为RPC环境，除了拥有接收消息的功能外，也应该能发送消息。那我们就先来看一看NettyRpcEnv中与消息发送相关的成员：
+  * transportConf：传输配置，由SparkConf创建而来，负责管理与RPC相关的各种配置;
+
+  * dispatcher：负责消息的路由，用于将消息路由到正确的RPC端点;
+
+  * StreamManager：流式管理器，用于处理RPC环境中的文件，如自定义的配置文件或者JAR包;
+
+  * TransportContext：传输上下文，类似于RPC环境中的SparkContext，负责管理RPC的服务端与客户端以及它们之间的Netty通道和Pipeline;
+
+  * TransportClientFactory：创建RPC客户端TransportClient的工厂;
+
+  * TransportServer：RPC环境中的服务端;
+
   * clientFactory、fileDownloadFactory：都是TransportClientFactory类型，通过transportContext.createClientFactory()方法创建，这个工厂类
   在NettyRpcEnv中用于生产TransportClient。clientFactory用于处理一般性的请求发送和应答，而fileDownloadFactory专用于下载文件，按需创建，不会立即
   被初始化。
