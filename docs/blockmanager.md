@@ -111,4 +111,4 @@ getOrElseUpdate()方法能同时读写数据，上面介绍的都是其中的涉
   为写锁，现降级为读锁)，否则直接释放掉持有的锁。如果返回的迭代器不为空表示写入不成功，则调用removeBlockInternal()方法移除写入的块。最后返回putBody返回的迭代器。
 
 至此基本将BlockManager类的关键代码分析得差不多了，用一张图总结下上面的关于块数据读写的介绍吧：
-![BlockBlockManager读写](../image/blockmanager.png "BlockManager读写")
+![BlockBlockManager读写](../image/blockmanagerreadwrite.png "BlockManager读写")
