@@ -23,3 +23,7 @@ Cluster模式下，Driver的启动过程与Executor类似，运行在资源调�
   * Stage：一个Job可以分为多个Stage，它根据Job中RDD的依赖关系来分，每遇到一个宽依赖就会划分成一个新Stage;
 
   * Task：是最小最基本的计算单位，一般是数据的一个分块是一个Task，大小为128M;
+
+最简单的Spark任务的执行图可以用下面的图展现出来：
+![Spark任务执行图](../image/sparkapp.png "park任务执行图")
+
