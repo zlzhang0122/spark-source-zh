@@ -7,7 +7,7 @@ Storm、Spark Streaming(Structured Streaming)、Flink是实时流式计算领域
 由于SS依赖于底层的Spark Core的框架，所以就先从Spark Core的源码开始阅读，好了，那就开始吧，毕竟时间有限，必须争分夺秒。
 
 Spark Core的运行架构图如下图所示：
-![Spark运行架构图](../image/spark-runtime.png "Spark运行架构图")
+![Spark运行架构图](../image/sparkruntime.png "Spark运行架构图")
 
 其中，Resource Scheduler可以是YARN、Mesos、Kubernetes(K8s)、Spark Standalone(自带的资源管理器)，主要负责资源的分配和监控，Driver
 负责作业逻辑的调度和任务的监控。根据部署模式的不同，启动和运行的物理位置也有所不同。在Client模式下，Driver模块运行在Spark-Submit进程中。
@@ -27,3 +27,15 @@ Cluster模式下，Driver的启动过程与Executor类似，运行在资源调�
 最简单的Spark任务的执行图可以用下面的图展现出来：
 ![Spark任务执行图](../image/sparkapp.png "park任务执行图")
 
+既然要分析源码，总不能没有顺序的瞎读，一定要从总体上先对Spark进行一个把握。从整体到局部，先对整个系统有一个大致的了解，再深入到细节，这才是阅读
+源码的正确的打开方式。
+
+结合我个人的理解加上网上有关分析，我个人觉得Spark Core可以分成如下部分：
+  * Spark基础组件：包括SparkConf、SparkContext、SparkEnv、RpcEnv、SparkUI、MetricsSystem、HeartbeatReceiver等;
+
+  * Spark内存管理：包括MemoryManager、MemoryPool、MemoryStore、StaticMemoryManager、UnifiedMemoryManager等;
+
+  * Spark存储体系：包括BroadcastManager、SerializerManager、BlockTransferService、BlockManagerMaster、BlockManager等;
+
+  * Spark的运算体系：包括LiveListenerBus、ExecutorAllocationManager、ContextCleaner、RDD、Dependency、Checkpoint、DAGScheduler、
+  TaskScheduler等;

@@ -67,7 +67,7 @@ Source是一个非常简单的trait，其中定义了两个方法，sourceName�
 
 Sink也是一个比较简单的trait，其中定义了3个方法：start()/stop()方法分别用于启动和停止Sink，report()方法用于输出具体的metrics的值，其有七个具体的实现。
 具体来说，ConsoleSink输出到控制台，CsvSink输出到CSV文件。Slf4jSink对Codahale Metrics中的Slf4jReporter类进行简单封装，然后Slf4jReporter启动之后，
-就会按照pollPeriod和pollUnit指定的时间周期性的轮询METRics值并输出到符合SLF4J规范的日志等。此外，JmxSink可以通过将metrics数据输出到JMX中，从而通过
+就会按照pollPeriod和pollUnit指定的时间周期性的轮询Metrics值并输出到符合slf4j规范的日志等。此外，JmxSink可以通过将metrics数据输出到JMX中，从而通过
 JVM可视化工具(如VisualVM)进行查看。而MetricsServlet在上面提到过，可以利用Spark UI内置的Jetty服务输出metrics数据到浏览器。
 Sink特征的继承体系如下图所示：
 ![Sink继承体系](../image/source.png "Sink继承体系")

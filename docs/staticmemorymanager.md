@@ -1,6 +1,6 @@
 ### StaticMemoryManager
 
-在[Spark源码阅读21：MemoryManage](./memorymanage.md)的最后已经看过MemoryManager类，点开其的实现会发现，它有两个实现类：StaticMemoryManager和
+在[Spark源码阅读11：MemoryManage](./memorymanage.md)的最后已经看过MemoryManager类，点开其的实现会发现，它有两个实现类：StaticMemoryManager和
 UnifiedMemoryManager(TestMemoryManager属于测试类，不算)，前者是在Spark 1.6版本之前使用，之后默认采用的是后者。虽然前者已经默认不再使用，但是由于
 它相对比较简单，对于研究源码来说还是可以读一下的。
 
@@ -36,4 +36,4 @@ StaticMemoryManager类实现了MemoryManager中定义的三个用于申请内存
 
 从上面的分析可知，StaticMemoryManager之所以称做静态内存管理器，就是因为其内存区域的大小都是事先经过各种比例参数确定好的，这样虽然实现简单，但是对于比较
 复杂场景想要设置得非常完美是非常困难的，对于设置这些参数的人的要求也非常高，极其容易出现设置不当导致有的内存不足而另一部分却过剩的情况，UnifiedMemoryManager
-就是为了解决上述问题而出现的。UnifiedMemoryManager类将在接下来进行分析，今天实在是太累了，而且不能出去真是闷得太发慌了！！！
+就是为了解决上述问题而出现的，UnifiedMemoryManager类将在接下来进行分析。

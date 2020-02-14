@@ -24,7 +24,7 @@ NettyRpcEnv作为RPC环境，除了拥有接收消息的功能外，也应该能
   TransportClientFactory.createClient()方法本身就是一个阻塞调用，因此需要用线程池来进行异步处理，线程池大小由spark.rpc.connect.threads调节，
   默认大小是64。
 
-  * outboxes：在[Spark源码阅读7：Dispatcher](../docs/dispatcher.md)中已经研究过Inbox这个"收件箱"组件了，outboxes就是与之对应的
+  * outboxes：在[Spark源码阅读6：Dispatcher](../docs/dispatcher.md)中已经研究过Inbox这个"收件箱"组件了，outboxes就是与之对应的
   "发件箱"，维护着远端RPC地址与各个发件箱的映射，所有需要发送的消息都会先放入到Outbox中再进行处理，且里面的所有消息都继承自OutboxMessage特征。
 
 OutboxMessage特征比较简单，其中只有两个方法：sendWith()和onFailure()。它有两个实现类，分别是无需应答的消息OneWayOutboxMessage和需要应答的消息
@@ -48,7 +48,7 @@ Outbox用于发送消息，但其中的消息是何时投递过来的呢？向�
 远端RPC端点引用对应的TransportClient，就直接调用OutboxMessage.sendWith()方法投递，否则就先从outboxes缓存中获取RPC地址对应的发件箱，如果发件箱
 也没有就先new一个出来，最后判断如果NettyRpcEnv和Outbox没有停止的话，就调用send()进行发送。
 
-ask()方法和send()方法在[Spark源码阅读6：RpcEnv](../docs/rpcenv.md)中已经遇见过，先分析ask()方法，它的作用是"异步发送一条消息，并在指定
+ask()方法和send()方法在[Spark源码阅读5：RpcEnv](../docs/rpcenv.md)中已经遇见过，先分析ask()方法，它的作用是"异步发送一条消息，并在指定
 的超时时间内等待RPC端点的回复"。从代码实现上看，ask()方法的执行分为两种情况：
   * 如果远端地址与当前NettyRpcEnv的地址相同，那么说明处理该消息的RPC端点就在本地，此时新建Promise对象，将其Future设置为回调方法(即onSuccess()方法
   和onFailure()方法)，并调用调度器的postLocalMessage()方法将消息发送给本地的RPC端点。

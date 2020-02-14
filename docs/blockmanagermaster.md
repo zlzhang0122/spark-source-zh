@@ -1,6 +1,6 @@
 ### BlockManagerMaster
 
-在[Spark源码阅读6：RpcEnv](./rpcenv.md)里面已经提到过SparkEnv中创建的诸多组件之一的BlockManager块管理器，它负责管理块的存储、读写和状态信息，是整个
+在[Spark源码阅读5：RpcEnv](./rpcenv.md)里面已经提到过SparkEnv中创建的诸多组件之一的BlockManager块管理器，它负责管理块的存储、读写和状态信息，是整个
 Spark存储子系统的基础。既然它是Spark存储子系统的基础，当然得来拜读一下其源码，了解一下它与前面介绍的MemoryManager及DiskBlockManager之间的关系。
 
 BlockManager也是主从架构，它运行在所有的节点，包括Driver节点和Executor节点，并且提供了本地和远程接口来写入和定位位于不同存储中的块，其初始化依赖于多个
