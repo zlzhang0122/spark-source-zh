@@ -2,7 +2,7 @@
 
 RPC环境承担着Spark体系内几乎所有的内部及外部通信，RpcEnv抽象类是Spark RPC环境的通用表示，其中定义的setupEndpoint()方法用来注册一个RPC端点(RpcEndpoint)，
 并返回其引用(RpcEndpointRef)。如果客户端想向一个RpcEndpoint发送消息，那么首先必须获取其对应RpcEndpoint的引用。其关系如下所示：
-![RpcEnv](../image/rpc-env.png "RpcEnv")
+![RpcEnv](../image/rpcenv.png "RpcEnv")
 
 由上图可知RpcEndpoint和RpcEndpointRef是RPC环境中的基础组件，其中RpcEndpoint是一个trait，其定义的方法有：
   * self()：获取当前RpcEndpoint对应的RpcEndpointRef。

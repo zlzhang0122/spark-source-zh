@@ -48,4 +48,4 @@ SparkEnv也是SparkContext中的重要组件，Driver和Executor的正常运行�
 在create()方法的最后生成了SparkEnv类的实例，并创建了Driver端的临时文件夹，和返回该实例。与SparkContext一样，SparkEnv也会在伴生对象中将已创建的
 SparkEnv的实例保存起来，一是避免重复创建，同时也是为了保证在同一节点上执行环境的一致性。还是用一张图来总结一下上面的内容：
 
-![SparkEnv初始化](../image/spark-env.png "SparkEnv初始化")
+![SparkEnv初始化](../image/sparkenv.png "SparkEnv初始化")

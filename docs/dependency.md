@@ -18,7 +18,7 @@ getParents()，用于返回partitionId对应分区依赖的所有父RDD的分区
 
 OneToOneDependency和RangeDependency都是一一对应关系，当子RDD分区对应多个父RDD的分区(如join()算子)时，也可以形成窄依赖，其前提是父子RDD的分区
 规则完全相同，即子RDD的某个分区对应父RDD 1的分区p，也对应父RDD 2的分区p，如果分区规则不同，就会变成宽依赖。
-![窄依赖图](../image/narrow-dependency.png "窄依赖图")
+![窄依赖图](../image/narrowdependency.png "窄依赖图")
 窄依赖图//todo,假装此处有图,真的以后补
 
 (2) 宽依赖：实际上没有WidthDependency这样个类，实际上的类名是ShuffleDependency，叫做"Shuffle依赖"，父RDD的每个分区被其子RDD的多个分区所依赖，且
@@ -40,7 +40,7 @@ ShuffleDependency类的其它构造方法参数如下：
 
 随着宽依赖的创建，还会调用SparkContext.newShuffleId()方法分配一个新的Shuffle ID，以及调用ShuffleManager.registerShuffle方法注册该Shuffle，返回
 Shuffle句柄(ShuffleHandle)。
-![宽依赖图](../image/shuffle-dependency.png "宽依赖图")
+![宽依赖图](../image/shuffledependency.png "宽依赖图")
 宽依赖图//todo,假装此处应有图,真的以后补
 
 区分宽依赖与窄依赖的原因是：窄依赖关系的RDD在集群的节点的内存中可以以流水线(pipeline)的方式高效运行。
