@@ -4,9 +4,9 @@
 
 * [Spark源码阅读1：SparkConf](../master/docs/sparkconf.md)
 
-* [Spark源码阅读2：SparkContext主要组件](../master/docs/sparkcontext-components.md)
+* [Spark源码阅读2：SparkContext主要组件](../master/docs/sparkcontextcomponents.md)
 
-* [Spark源码阅读3：SparkContext其它相关](../master/docs/sparkcontext-other.md)
+* [Spark源码阅读3：SparkContext其它相关](../master/docs/sparkcontextother.md)
 
 * [Spark源码阅读4：SparkEnv初始化](../master/docs/sparkenv.md)
 
