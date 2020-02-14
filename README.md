@@ -10,7 +10,7 @@
 
 * [Spark源码阅读4：SparkEnv初始化](../master/docs/sparkenv.md)
 
-* [Spark源码阅读5：RpcEnv](../master/docs/rpcenv.md)12.15\2.2\01.29\01.31\2.1\01.01\01.26
+* [Spark源码阅读5：RpcEnv](../master/docs/rpcenv.md)
 
 * [Spark源码阅读6：Dispatcher](../master/docs/dispatcher.md)
 
