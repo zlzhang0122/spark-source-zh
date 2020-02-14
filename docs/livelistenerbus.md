@@ -1,6 +1,6 @@
 ### LiveListenerBus事件总线
 
-事件总线LiveListenerBus是Spark中非常重要的支撑组件，前面已经提到它采用了监听器的设计模式，其大致流程如下图：
+事件总线LiveListenerBus是Spark中非常重要的组件，前面已经提到它采用了监听器的设计模式，其大致流程如下图：
 
 ![LiveListenerBus事件总线](../image/livelistenerbus.png "LiveListenerBus事件总线")
 
