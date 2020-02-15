@@ -10,8 +10,8 @@ SparkSubmit及其他用户传入的参数。在spark-class中，首先会使用l
 org.apache.spark.launcher.Main正式启动org.apache.spark.deploy.SparkSubmit的执行。
 
 在submit方法中，包含两个步骤：
-  - 基于集群管理器和部署模式为运行的主子类设置适当的类路径、系统属性和应用参数以准备运行环境;
-  - 使用运行环境去调用主子类的主方法。在standalone模式下，有两种提交网关：1.传统的Akka网关，使用org.apache.spark.deploy.Client作为封装。2.从Spark 1.3
+  1. 基于集群管理器和部署模式为运行的主子类设置适当的类路径、系统属性和应用参数以准备运行环境;
+  2. 使用运行环境去调用主子类的主方法。在standalone模式下，有两种提交网关：1.传统的Akka网关，使用org.apache.spark.deploy.Client作为封装。2.从Spark 1.3
 引入的新版基于Rest的网关。后一种是从Spark 1.3起的默认网关，但是提交可能会失败。如果主节点终端被证明不是一个REST服务器，可以考虑使用遗留的网关。
 
 可以看到，其实最终调用的还是runMain方法，在最后会调用JavaMainApplication方法，该方法是SparkApplication的实现，并且使用main方法封装了
