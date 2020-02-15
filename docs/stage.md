@@ -13,3 +13,8 @@
 划分为同一个Stage。通过这种递归的调用方式，将所有的RDD进行划分。实际上[Spark源码阅读30：Spark任务提交](./jobsubmit.md)里也已经大致介绍过，
 最后一个Stage也就是finalStage的创建是通过触发action来实现的。在递归生成Stage时具体区分宽依赖与窄依赖的办法是看依赖关系是否为ShuffleDependency，
 如果是则表示是宽依赖，需要重新生成Stage，否则就可以属于同一个Stage，生成完成finalStage后就会进行Stage的提交。
+
+具体来说，在DAGScheduler.createResultStage()方法中会调用getOrCreateParentStages()方法获取Parent Stages，获取方式是采用广度优先遍历的方式
+根据宽依赖ShuffleDependency获取到其直接的宽依赖(非直接的宽依赖不会被获取到)，然后为每一个获得的宽依赖生成ShuffleMapStage，生成方式是如果该宽依赖
+对应的Stage已经存在则不需要创建，直接原样返回。否则就表示需要创建，在创建之前会先查看其依赖的父类Stage是否存在，没有的话需要先进行创建，创建父Stage完成
+后再调用createShuffleMapStage()创建当前ShuffleDependency对应的Stage，最后创建ResultStage，至此已根据ShuffleDependency对Stage完成了划分。
