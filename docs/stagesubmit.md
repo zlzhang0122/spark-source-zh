@@ -3,11 +3,13 @@
 在[Spark源码阅读30：Spark任务提交](./jobsubmit.md)里已经介绍到了任务提交时会调用handleJobSubmitted进行任务的提交，在其中提到，当rdd触发
 action操作后，都会调用SparkContext的runJob方法，并调用DAGScheduler.handleJobSubmitted方法完成整个job的提交。接着继续往下追，其后的调用
 流程是：
+  1. org.apache.spark.scheduler.DAGScheduler.handleJobSubmitted()
 
-org.apache.spark.scheduler.DAGScheduler.handleJobSubmitted()
-org.apache.spark.scheduler.DAGScheduler.handleJobSubmitted.submitStage()
-org.apache.spark.scheduler.DAGScheduler.handleJobSubmitted.submitMissingTasks()
-org.apache.spark.scheduler.TaskScheduler.submitTasks()
+  2. org.apache.spark.scheduler.DAGScheduler.handleJobSubmitted.submitStage()
+
+  3. org.apache.spark.scheduler.DAGScheduler.handleJobSubmitted.submitMissingTasks()
+
+  4. org.apache.spark.scheduler.TaskScheduler.submitTasks()
 
 ![StageSubmit调用链](../image/stagesubmit.png "StageSubmit调用链图")
 
@@ -59,5 +61,3 @@ ParentStage：ShuffleMapStage，生成TaskSet，并由TaskScheduler向集群申�
 执行位置的算法。标记新的stage attempt关系，并发送一个SparkListenerStageSubmitted事件。对stage进行序列化并广播，此时有两种情况，如果是ShuffleMapStage，则序列化rdd和
 shuffleDep；如果是ResultStage，序列化rdd和func。接下来是一个比较重要的步骤，针对stage的每个分区构造task，形成tasks，因此stage的每个分区都会对应一个task，其中ShuffleMapStage
 生成ShuffleMapTasks，ResultStage生成ResultTasks。如果tasks不为空，则利用taskScheduler.submitTasks()提交task，否则标记stage已完成。
-
-
