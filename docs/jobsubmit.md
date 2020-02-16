@@ -34,7 +34,9 @@ DAGSchedulerEventProcessLoop就是EventLoop的子类，它对onReceive()进行�
   负责处理RDD的一个Partition。所以RDD的多个partition会分别由不同的Task去处理(虽然这些Task的处理逻辑完全是一样的)，这一组Task就组成了一个Stage，一个Stage的开始就是从外部存储
   或者shuffle结果中读取数据，一个Stage的结束就是由于发生shuffle或者生成结果时，而一个Job则包含多个Stage;
 
-  * 根据finalStage的类型创建job，如果finalStage是ResultStage则创建一个resultJob，否则如果是ShuffleMapStage则创建一个mapStageJob;
+  * 根据finalStage的类型创建一个ActiveJob对象job，如果finalStage是ResultStage则创建一个resultJob，否则如果是ShuffleMapStage则创建一个mapStageJob，并清除RDD分区位置缓存，
+  调用logInfo()方法记录日志信息，维护各种数据对应关系涉及到的数据结构：(1) 将jobId-->ActiveJob的对应关系添加到HashMap类型的数据结构jobIdToActiveJob中去;(2) 将ActiveJob添加
+  到HashSet类型的数据结构activeJobs中去;
 
   * 向LiveListenerBus提交一个SparkListenerJobStart事件，listenerThread后台线程会处理该事件;
 

@@ -62,11 +62,11 @@
 
 * [Spark源码阅读30：Spark任务提交](../master/docs/jobsubmit.md)
 
-* [Spark源码阅读31：Stage的划分](../master/docs/stage.md)
+* [Spark源码阅读31：Stage的提交](../master/docs/stagesubmit.md)
 
-* [Spark源码阅读32：Stage的提交](../master/docs/stagesubmit.md)
+* [Spark源码阅读32：Task调度](../master/docs/taskschedule.md)
 
-* [Spark源码阅读33：Task调度](../master/docs/taskschedule.md)
+* [Spark源码阅读33：Task执行](../master/docs/runtask.md)
 
 
 ### 扩展阅读
