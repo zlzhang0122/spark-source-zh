@@ -68,6 +68,8 @@
 
 * [Spark源码阅读33：Task执行](../master/docs/runtask.md)
 
+* [SparkStreaming源码阅读1：SparkStreaming序](../master/docs/sparkstreaming-start.md)
+
 
 ### 扩展阅读
 
