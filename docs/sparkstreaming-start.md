@@ -36,3 +36,6 @@ Flink是将批处理看作是流式计算的特例)。
 
 好了，分析完我们想象的利用Spark Core作为底层架构来进行流式计算需要解决的三个问题及可能的四个组件，接下来分析SparkStreaming也主要是从四个层面来看Spark
 Streaming是怎样提出针对性的解决方案的。
+
+首先，是RDD DAG模版，Saprk Streaming根据该模版生成一个个的DAG实例。在Spark Streaming的世界里，这个DAG"模版"的具体实现就是DStreamGraph，而DStream
+就类似于Spark Core中的RDD。
