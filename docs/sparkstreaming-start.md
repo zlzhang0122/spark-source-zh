@@ -38,4 +38,14 @@ Flink是将批处理看作是流式计算的特例)。
 Streaming是怎样提出针对性的解决方案的。
 
 首先，是RDD DAG模版，Saprk Streaming根据该模版生成一个个的DAG实例。在Spark Streaming的世界里，这个DAG"模版"的具体实现就是DStreamGraph，而DStream
-就类似于Spark Core中的RDD。
+就类似于Spark Core中的RDD。在Spark Core中，RDD对应着很多的子类，几乎每一个子类都有一个对应的DStream，比如UnionRDD对应的是UnionDStream。RDD通过
+转换算子连接成RDD DAG(有向无环图，但貌似没有具体的类)，而DStream也可以通过转换算子连接成DStreamGraph(对比一下，在Flink中叫做StreamGraph)。
+
+那么，DStream和RDD的关系是怎么样的呢？既然DStream是RDD模版，而且都能进行转换操作(map、filter、reduce等)，那么它们有什么区别呢？首先，DStream维护着
+每个产出的RDD实例的引用，其次，对于那些能够进行流控的DStream子类，还会记录用于进行流控的信息，如每次进行处理时源头数据的条数、计算所花费的时间等。因此，
+我们可以将DStream理解为RDD+微批的维度数据。
+
+值得注意的是，在Spark Stream和Flink中，DStream(Spark Streaming)和DataStream(Flink)是顶点，转换才是边(这与Storm中是完全相反的。Storm中，计算Spout
+和Bolt是顶点，Tuple数据才是边)。
+
+有了DStream和DStreamGraph，也即定义了数据的处理逻辑，再来看看Spark Streaming是如何进行动态调度的。
