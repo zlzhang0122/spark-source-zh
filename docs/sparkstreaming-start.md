@@ -50,3 +50,8 @@ Streaming是怎样提出针对性的解决方案的。
 和Bolt是顶点，Tuple数据才是边)。
 
 有了DStream和DStreamGraph，也即定义了数据的处理逻辑，再来看看Spark Streaming是如何进行动态调度的。
+在Spark Streaming程序的入口，我们会定义一个batchDuration，它负责周期性的间隔一定的时间并比照静态的DStreamGraph动态生成RDD DAG实例。在Spark Streaming
+中，负责动态调度作业的是JobScheduler类，在Spark Streaming程序开始运行前都会生成一个JobScheduler的实例，并通过start()运行起来。
+
+JobScheduler有两个非常重要的成员：JobGenerator和ReceiverTracker。每个微批的RDD DAG的具体生成工作都是委托为JobGenerator的，而源头数据的记录工作则是委托
+给了ReceiverTracker。
