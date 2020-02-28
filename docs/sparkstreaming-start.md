@@ -55,3 +55,16 @@ Streaming是怎样提出针对性的解决方案的。
 
 JobScheduler有两个非常重要的成员：JobGenerator和ReceiverTracker。每个微批的RDD DAG的具体生成工作都是委托为JobGenerator的，而源头数据的记录工作则是委托
 给了ReceiverTracker。
+
+JobGenerator维护了一个定时器，周期就是前面有讲到的batchDuration，它定时的为每个微批生成RDD DAG的实例，每次的实际生成包含5个步骤：
+  * 要求ReceiverTracker将自上一次微批切分后的到达的数据都切分到本次新的微批里，也就是对当前已收到但未处理的数据进行一次分配;
+
+  * 要求DStreamGraph复制出一份新的RDD DAG实例，具体过程是：DStreamGraph将DAG图里末尾Stream节点生成具体的RDD实例，并递归的调用尾DStream的上游DStream
+  节点，从而遍历整个DStreamGraph，遍历结束也就恰好生成了RDD DAG的实例;
+
+  * 获取前面ReceiverTracker分配到本微批次的源头数据的meta息;
+
+  * 将前面生成的RDD DAG和meta信息，共同提交给JobScheduler异步执行;
+
+  * 提交结束时(不论是否已经开始执行)，立即对整个系统的当前运行状态做checkpoint;
+
