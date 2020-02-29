@@ -74,3 +74,5 @@
 ### 扩展阅读
 
 * [Spark扩展阅读：Scala语法](../master/docs/scala.md)
+
+* [Spark扩展阅读：深入SparkRPC](../master/docs/rpcinaction.md)
