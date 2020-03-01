@@ -17,3 +17,10 @@ Spark RPC环境了。之后再在这层环境上使用RpcEndpoint进行通信就
 好了，到了这里，相信大家应该已经明确了我们的借鉴过程的起点应该是SparkConf，不过SparkConf负责管理的是整个Spark的配置项，我们需要借鉴的只是RPC相关的东西，
 并不需要那么多，其实可以给它进行一下瘦身工作。关于SparkConf的知识，可以参考[Spark源码阅读1：SparkConf](./master/docs/sparkconf.md)。
 
+在完成了SparkConf的瘦身后，就来到了RpcEnv这个抽象类，在这个类中RpcEnvFileServer类没什么作用，完全可以去掉，另外为了让它能正常运行还得添加一些额外的
+工具类。在这个类中，我们知道最重要的方法是在其中定义的setupEndpoint()方法，它用来注册一个RPC端点(RpcEndpoint)，并返回其引用(RpcEndpointRef)。如果
+客户端想向一个RpcEndpoint发送消息，那么首先必须就获取其对应RpcEndpoint的引用。
+
+再来看一下RpcEnv抽象类的唯一实现NettyRpcEnv类，首先要创建它必须要通过NettyRpcEnvFactory类的create()方法，它接收一个参数RpcEnvConfig。这个配置类
+与RpcEnv在同一个文件中，是一个简单的样例类，对SparkConf进行了简单的封装，增加了一些RPC通信额外必需的参数，包括IP、端口号等等。在create()方法中会先创建
+Java序列化器，然后构造NettyRpcEnv实例。
