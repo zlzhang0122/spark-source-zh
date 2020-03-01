@@ -13,7 +13,8 @@ SparkConf内部采用settings存储所有配置，它是ConcurrentHashMap类的�
 
 可以通过三种方式设置Spark的配置项：
   * 直接调用set方法设置，这是最常见的设置方法，SparkConf提供了多种重载的set方法，但是最终都调用到了有三个参数的set(key: String, value: String, silent: Boolean)
-  方法，在这个方法中我们可以看到配置项的key和value都不能为null，否则会抛出NPE错误，并且所有set方法及其重载方法都返回this，因此能够通过链式调用简化代码。
+  方法，在这个方法中我们可以看到配置项的key和value都不能为null，否则会抛出NPE错误，silent表示的是如果给定的配置项已过时是否要打印警告，并且所有set方法及其重载方法都返回
+  this，因此能够通过链式调用简化代码。
   * 通过系统属性加载，如果设置SparkConf类的主构造函数参数loadDefaults为true，那么SparkConf会从Java系统属性中加载配置项，如果调用无参的辅助构造方法new SparkConf()，
   也会将loadDefaults设置为true，java系统属性可以通过System.setProperties()方法在程序中动态设置。在具体实现上，它是通过Utils通用工具类取得系统属性，过滤出以"spark."
   开头的属性，调用set方法设置配置。由于这个设置是一次性初始化的，所以可以用set方法来覆盖它们。

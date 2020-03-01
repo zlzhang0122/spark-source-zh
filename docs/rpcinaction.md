@@ -8,3 +8,12 @@
 既然打算借鉴，那首先就必须对Spark节点间的RPC有一个深入的了解才行，于是在前面已经阅读过相关源码的基础上，咱们再有目的的深入分析研究一下，以方便咱的这个
 借鉴过程^-^！
 
+先回顾一下[Spark源码阅读5：RpcEnv](./master/docs/rpcenv.md)的知识。首先，RPC环境承担着Spark体系内几乎所有的内部及外部通信，RpcEnv抽象类是Spark
+RPC环境的通用表示，其需要由SparkConf组件加载Spark中RPC相关的配置，但RpcEnv知识一个抽象类，NettyRpcEnv是Spark官方提供的RPC环境的唯一实现，通过
+NettyRpcEnvFactory的create()方法创建，这个方法先创建JavaSerializer序列化器，用于RPC传输的序列化，然后通过NettyRpcEnv的构造方法创建NettyRpcEnv，
+这其中也包含一些RPC基础组件的初始化，最后定义函数变量startNettyRpcEnv并调用工具类Utils中的startServiceOnPort()方法来启动NettyRpcEnv。如此就能得到
+Spark RPC环境了。之后再在这层环境上使用RpcEndpoint进行通信就是顺利成章的事了。
+
+好了，到了这里，相信大家应该已经明确了我们的借鉴过程的起点应该是SparkConf，不过SparkConf负责管理的是整个Spark的配置项，我们需要借鉴的只是RPC相关的东西，
+并不需要那么多，其实可以给它进行一下瘦身工作。关于SparkConf的知识，可以参考[Spark源码阅读1：SparkConf](./master/docs/sparkconf.md)。
+
