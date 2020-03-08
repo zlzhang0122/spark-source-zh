@@ -54,13 +54,17 @@ RDD类中对Partition、Dependency和Preferred Location都提供了简单的Gett
 RDD拥有很多的子类，这些子类都实现了上面提到的4个抽象方法，绝大多数对RDD的操作(算子)都会返回RDD子类的实例，主要的RDD子类如下图所示：
 ![RDD类图](../image/rdd.png "RDD类图")
 
-我们知道，Spark中RDD的算子有两类，一种是转换算子(Transformation)，另一种是行动算子(Action)，下面分别来看一下：
+我们知道，Spark中RDD的算子有三类，一种是转换算子(Transformation)，另一种是行动算子(Action)，还有一种是控制算子(controller)，下面分别来看一下：
   * 转换算子：用于对一个RDD执行一系列的逻辑，使其变成另一个RDD(实际上是new出了一个新的类型的RDD，将原RDD类型包装了进去)。我们来看一个工作中比较常见且效率
   比较高的mapPartitions()算子：它对RDD[T]每个分区的迭代器施加函数f逻辑的转换，返回一个MapPartitionsRDD[U]，参数preservesPartitioning表示是否保留父
   RDD的分区。在MapPartitionsRDD[U]中，其中的getPartitions()和partitioner方法都是直接复用父RDD的对应方法，compute()方法则是直接应用函数f的逻辑。
 
   * 动作算子：用于触发Job的提交，真正执行RDD转换逻辑的计算，并返回处理结果。first()、count()、take()、collect()和foreach()都是经常使用到的，本质上都是调用了SparkContext.runJob()
   方法来提交一个Job来触发调度与执行的，可以说是一切的起点。
+
+  * 控制算子：Spark中控制算子也是懒执行的，需要Action算子触发才能执行，主要是为了对数据进行缓存。控制算子有三种，cache,persist,checkpoint，
+  以上算子都可以将RDD持久化，持久化的单位是partition。cache和persist都是懒执行的。必须有一个action类算子触发执行。checkpoint算子不仅能将RDD
+  持久化到磁盘，还能切断RDD之间的依赖关系。
 
 Spark 中所有的 transformations 都是 lazy（懒加载的），因此它不会立刻计算出结果。相反，他们只记得应用于一些基本数据集的转换（例如：文件）。
 只有当需要返回结果给驱动程序时，transformations 才开始计算。这种设计使 Spark 的运行更高效。例如，我们可以了解到，map 所创建的数据集将被用
