@@ -111,3 +111,6 @@ TaskSet生成时确定，就是jobId，也就是FIFO是先按照Job的顺序再�
 9、循环sortedTaskSets，按照就近原则调度每个TaskSet，最大化实现任务的本地化，调度的优先级顺序是PROCESS_LOCAL、NODE_LOCAL、NO_PREF、RACK_LOCAL、ANY;
 
 10、设置标志位hasLaunchedTask，并返回tasks，resourceOffers()方法调用完成;
+
+用一张图来总结下前面介绍的从RDD到stage再到task的调度过程：
+![任务调度过程](../image/jobschedule.png "任务调度过程")
