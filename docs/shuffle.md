@@ -55,5 +55,3 @@ map端预聚合来进行不同的处理。如果需要进行map端预聚合，�
 
 最后，用一张图来总结一下：
 ![SortShuffleWrite](../image/sortshufflewrite.png "SortShuffleWrite")
-
-
