@@ -28,5 +28,32 @@ Shuffle是所有采用mapreduce思想的大数据计算框架的必经阶段，�
 
   * getReader()：这个就比较简单了，只有一种即BlockStoreShuffleReader，它继承自ShuffleReader特征，并实现了read()方法;
 
-来张图总结一下：
+先来张图总结一下：
 ![ShuffleManager](../image/shufflemanager.png "ShuffleManager")
+
+再来看看它的write()方法，代码并不难，逻辑就是根据Shuffle是否有map端预聚合来传递不同的参数构建外部排序器ExternalSorter，然后将shuffle的数据
+放入进行处理，然后创建输出索引文件和输出文件，返回MapStatus数据结构。再来跟一下ExternalSorter类，在它的insertAll()方法中，会根据是否需要进行
+map端预聚合来进行不同的处理。如果需要进行map端预聚合，则使用PartitionedAppendOnlyMap保存聚合数据，这是一个能够保存分区信息的，且只能追加的映射
+型结构，其键类型是(partition_id, key)二元组。如果不需要map端预聚合，则将数据放入PartitionedPairBuffer中，其作用与PartitionedAppendOnlyMap
+类似，只不过内部不是映射型结构而是可变长度的数组。这些操作都是在内存中进行，当内存不足时会溢写磁盘操作，调用的方法是maybeSpillCollection()，这个
+方法是对maybeSpill()方法的简单封装，它会调用maybeSpill()方法检查是否需要溢写磁盘，在这个方法中会先申请内存扩容，如果申请不到内存或申请到的内存过
+少才开始溢写，也就是说它会尽量的使用内存进行sort shuffle，直到实在没有足够的内存才会使用磁盘(毕竟磁盘操作相比内存操作慢了几个数量级)。这里有个很有
+意思的事情：传入的参数currentMemory的含义是缓存的预估内存占用量而不是实际占用量，这是因为上面介绍的PartitionedAppendOnlyMap和PartitionedPairBuffer
+都能进行动态扩容，并且都能通过采样估计其大小。
+
+真正负责溢写磁盘的方法是spill()方法，它根据TimSort算法进行排序，这个算法是很多平台排序算法的默认实现，它原则上使用的是归并排序算法，但是在小片段合并
+中使用了插入排序算法。在得到排序结果后将这些数据通过spillMemoryIteratorToDisk()方法写入磁盘文件，实现上是遍历上面生成的map或buffer缓存中的数据，逐
+条写入到diskWriter中，并在记录条数达到批次阈值(默认是10000)将这批数据刷到磁盘中，最后返回溢写的文件对象，这个过程是能保证顺序的。另外，一旦发生溢写就
+会重新new出上面的map或buffer结构重新开始缓存。
+
+既然是sort shuffle，那么在输出时肯定也是排序的，它会根据是否有溢写文件进行不同的处理。如果没有溢写，那么就会非常简单，直接按照是否有map端预聚合从map
+或buffer中取出数据并排序即可。如果有溢写，则还需要将溢写文件与缓存的数据按照分区进行归并排序。但是不管是否有溢写，得到的排序结果都会被合并到一个文件中。
+由于排序时是先按分区ID排序，再根据是否有排序规则判断是否按key排序。所以这个排序并不能保证数据有序。
+
+那么数据文件和索引文件是如何输出的呢？从IndexShuffleBlockResolver类的writeIndexFileAndCommit()方法可知，它使用BufferedOutputStream进行批量写
+入，且每一个ShuffleMapTask通过SortShuffleWriter会产生两个文件，一个分区的数据文件，一个索引文件。
+
+最后，用一张图来总结一下：
+![SortShuffleWrite](../image/sortshufflewrite.png "SortShuffleWrite")
+
+
